@@ -27,27 +27,64 @@ const siteData = {
         "location": "Zurich, Switzerland"
     },
     "metrics": [
-        { "value": "23+", "label": "Publications" },
-        { "value": "700+", "label": "Citations" },
-        { "value": "CHF 2M+", "label": "Funding (PI/Co-PI)" },
-        { "value": "14+", "label": "Students Supervised" }
+        {
+            "value": "30+",
+            "label": "Publications"
+        },
+        {
+            "value": "800+",
+            "label": "Citations"
+        },
+        {
+            "value": "CHF 2M+",
+            "label": "Funding (PI/Co-PI)"
+        },
+        {
+            "value": "15+",
+            "label": "Students Supervised (PhD, Master and bachelor)"
+        }
     ],
     "skills": [
         {
             "category": "AI & Machine Learning",
-            "items": ["Vision-Language Models", "Large Language Models", "Reinforcement Learning (GRPO)", "Sparse Autoencoders", "Meta-Learning", "Few-Shot Learning", "Transfer Learning"]
+            "items": [
+                "Vision-Language Models",
+                "Large Language Models",
+                "Reinforcement Learning (GRPO)",
+                "Sparse Autoencoders",
+                "Meta-Learning",
+                "Transfer Learning"
+            ]
         },
         {
             "category": "NLP & Multilingual",
-            "items": ["Text-to-SQL", "Information Extraction", "Cross-lingual Transfer", "Visual Question Answering", "Report Generation", "Named Entity Recognition"]
+            "items": [
+                "Text-to-SQL",
+                "Information Extraction",
+                "Cross-lingual Transfer",
+                "Visual Question Answering"
+            ]
         },
         {
             "category": "Frameworks & Tools",
-            "items": ["PyTorch", "HuggingFace Transformers", "LangGraph", "LangChain", "vLLM", "DeepSpeed", "Docker", "SLURM"]
+            "items": [
+                "PyTorch",
+                "HuggingFace Transformers",
+                "LangGraph",
+                "LangChain",
+                "vLLM",
+                "DeepSpeed",
+                "Docker",
+                "SLURM"
+            ]
         },
         {
             "category": "Platforms & Infrastructure",
-            "items": ["CSCS Alps (Swiss National Supercomputer)", "AWS", "Weights & Biases", "MLflow", "Git / GitHub Actions"]
+            "items": [
+                "CSCS Alps (Swiss National Supercomputer)",
+                "Weights & Biases",
+                "Git / GitHub Actions"
+            ]
         }
     ],
     "about": {
@@ -365,9 +402,13 @@ const siteData = {
             "title": "RADICAL",
             "tagline": "Radiology AI-Driven Clinical Decision-making with Multi-modal Exploration",
             "challenge": "Clinicians need intelligent tools that combine multi-modal data sources to support complex diagnostic decisions in radiology.",
-            "approach": "Developing AI-driven multi-modal exploration tools integrating vision-language models, agentic reasoning, and clinical workflows.",
+            "approach": "Developing AI-driven multi-modal exploration tools integrating vision-language models, agentic reasoning, and clinical workflows.\nApplied Sparse Autoencoders for mechanistic interpretability and inference-time hallucination steering in RadVLM, LLaVA-Med, and MedGemma.",
             "description": "DIZH 4th Project Call (2024). PI together with Prof. Michael Krauthammer.",
-            "impact": ["CHF 599K funded", "Multi-agent clinical pipeline", "Real-time decision support"],
+            "impact": [
+                "CHF 599K funded",
+                "Multi-agent clinical pipeline",
+                "SAE-based hallucination mitigation"
+            ],
             "tech": [
                 "DIZH",
                 "CHF 599k",
@@ -389,9 +430,13 @@ const siteData = {
             "title": "TRUST-RAD",
             "tagline": "Trustworthy Medical AI Assistant Tools for Radiology",
             "challenge": "Medical VLMs hallucinate clinical findings, posing patient safety risks. Need interpretable methods to detect and mitigate these failures.",
-            "approach": "Applied Sparse Autoencoders for mechanistic interpretability and inference-time hallucination steering in RadVLM, LLaVA-Med, and MedGemma.",
+            "approach": "Multimodal RAG, RadVLM SFT",
             "description": "DIZH Rapid Action Call (2024). PI.",
-            "impact": ["CHF 150K funded", "SAE-based hallucination mitigation", "3 VLMs benchmarked"],
+            "impact": [
+                "CHF 150K funded",
+                "3 VLMs benchmarked",
+                "SFT dataset (1M instruction data)"
+            ],
             "tech": [
                 "DIZH",
                 "CHF 150k",
@@ -409,12 +454,16 @@ const siteData = {
             "badge": "Co-Lead",
             "status": "Ongoing",
             "icon": "fas fa-brain",
-            "title": "RadVLM & Swiss-AI Initiative",
-            "tagline": "Foundation Model for Health — Multimodal LLM for Radiology",
+            "title": "Swiss-AI Initiative Large Grant",
+            "tagline": "3D Vision-Language Model for Radiology",
             "challenge": "Existing medical VLMs lack multitask capabilities, 3D understanding, and factual accuracy for real clinical deployment.",
             "approach": "Built RadVLM on Qwen-VL, trained on 500K+ radiology pairs at Swiss National Supercomputer (CSCS Alps). Applied GRPO reinforcement learning to reduce hallucinations.",
             "description": "Co-leading the Swiss-AI initiative on foundation models for health.",
-            "impact": ["500K GPU-hours on CSCS Alps", "Model on PhysioNet", "MIDL 2026 paper accepted"],
+            "impact": [
+                "500K GPU-hours on CSCS Alps",
+                "Model on PhysioNet",
+                "MIDL 2026 paper accepted"
+            ],
             "tech": [
                 "Swiss-AI",
                 "500k GPUh",
@@ -454,7 +503,11 @@ const siteData = {
             "challenge": "Existing Text-to-SQL systems fail on multilingual queries and lack robustness for real-world open data portals.",
             "approach": "Built StatBot.Swiss — a multilingual chatbot for Swiss open data using fine-tuned LLMs with cross-lingual transfer for Text-to-SQL.",
             "description": "Hasler Foundation Responsible AI Program (2024). PI.",
-            "impact": ["CHF 48K funded", "Published at ACL 2024", "4 languages supported"],
+            "impact": [
+                "CHF 48K funded",
+                "Published at ACL 2024",
+                "4 languages supported"
+            ],
             "tech": [
                 "Hasler",
                 "CHF 48k",
@@ -472,7 +525,11 @@ const siteData = {
             "challenge": "Organizations struggle to discover, explore, and link heterogeneous datasets across languages and modalities at scale.",
             "approach": "Building multi-modal agentic data exploration pipelines using LangGraph, LLM Compiler, and cross-lingual retrieval for open data platforms.",
             "description": "Horizon Europe funded project. Co-leading WP2 and WP3. Co-PI with Prof. Kurt Stockinger.",
-            "impact": ["EUR 8.16M total budget", "Pan-European consortium", "WP2 & WP3 lead"],
+            "impact": [
+                "EUR 8.16M total budget",
+                "Pan-European consortium",
+                "WP2 & WP3 lead"
+            ],
             "tech": [
                 "Horizon Europe",
                 "EUR 8.16M",
@@ -496,7 +553,11 @@ const siteData = {
             "challenge": "Clinical NLP models need to work across languages while respecting strict data privacy regulations in healthcare.",
             "approach": "Federated learning and privacy-preserving training for medical NLP across multilingual clinical corpora.",
             "description": "SNSF / HORIZON funded project. Co-PI with Prof. Michael Krauthammer.",
-            "impact": ["CHF 1.07M funded", "Cross-institutional collaboration", "Privacy-preserving NLP"],
+            "impact": [
+                "CHF 1.07M funded",
+                "Cross-institutional collaboration",
+                "Privacy-preserving NLP"
+            ],
             "tech": [
                 "SNSF",
                 "CHF 1.07M",
