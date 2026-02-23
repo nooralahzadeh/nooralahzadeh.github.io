@@ -21,6 +21,8 @@
             <nav class="sidebar-nav">
                 <a href="#" class="sidebar-link active" data-section="personal"><i class="fas fa-user"></i> Personal Info</a>
                 <a href="#" class="sidebar-link" data-section="about"><i class="fas fa-info-circle"></i> About</a>
+                <a href="#" class="sidebar-link" data-section="metrics"><i class="fas fa-chart-bar"></i> Metrics</a>
+                <a href="#" class="sidebar-link" data-section="skills"><i class="fas fa-tools"></i> Skills</a>
                 <a href="#" class="sidebar-link" data-section="news"><i class="fas fa-newspaper"></i> News</a>
                 <a href="#" class="sidebar-link" data-section="research"><i class="fas fa-microscope"></i> Research</a>
                 <a href="#" class="sidebar-link" data-section="publications"><i class="fas fa-book"></i> Publications</a>
@@ -65,7 +67,7 @@
     <!-- Toast notification -->
     <div class="toast" id="toast"></div>
 
-    <script src="data.js?v=9"></script>
+    <script src="data.js?v=10"></script>
     <script>
     /* ==========================================================
        ADMIN EDITOR — Visual editor for data.js
@@ -170,6 +172,8 @@
         const renderers = {
             personal: renderPersonalEditor,
             about: renderAboutEditor,
+            metrics: renderMetricsEditor,
+            skills: renderSkillsEditor,
             news: renderNewsEditor,
             research: renderResearchEditor,
             publications: renderPublicationsEditor,
@@ -207,6 +211,10 @@
                     <div class="form-group">
                         <label>Location</label>
                         <input type="text" id="p-location" value="${esc(d.location || '')}" placeholder="e.g. Zurich, Switzerland">
+                    </div>
+                    <div class="form-group col-span-full">
+                        <label>Tagline (shown below name in hero section)</label>
+                        <input type="text" id="p-tagline" value="${esc(d.tagline || '')}" placeholder="e.g. Building intelligent systems at the intersection of...">
                     </div>
                     <div class="form-group">
                         <label>Photo URL (leave empty for placeholder)</label>
@@ -258,6 +266,7 @@
         data.personal.title = val('p-title');
         data.personal.affiliation = val('p-affiliation');
         data.personal.location = val('p-location');
+        data.personal.tagline = val('p-tagline');
         data.personal.photo = val('p-photo');
         data.personal.links.scholar = val('p-scholar');
         data.personal.links.github = val('p-github');
@@ -354,6 +363,98 @@
     window.removeAboutParagraph = function(i) { data.about.paragraphs.splice(i, 1); renderAboutEditor(); };
     window.addHighlight = function() { data.about.highlights.push({ icon: 'fas fa-star', title: '', text: '' }); renderAboutEditor(); };
     window.removeHighlight = function(i) { data.about.highlights.splice(i, 1); renderAboutEditor(); };
+
+    // ─── METRICS ────────────────────────────────────────
+    function renderMetricsEditor() {
+        if (!data.metrics) data.metrics = [];
+        editorArea.innerHTML = `
+            <div class="editor-card">
+                <div class="card-header-flex">
+                    <h3>Impact Metrics Bar <span class="hint">Shown in the About section (e.g. "23+ Publications")</span></h3>
+                    <button class="btn btn-sm btn-outline" onclick="addMetric()"><i class="fas fa-plus"></i> Add Metric</button>
+                </div>
+                <div id="metric-items">
+                    ${data.metrics.map((m, i) => `
+                        <div class="inline-group" data-idx="${i}">
+                            <input type="text" placeholder="Value (e.g. 23+)" value="${esc(m.value)}" data-field="value" style="flex:0 0 120px">
+                            <input type="text" placeholder="Label (e.g. Publications)" value="${esc(m.label)}" data-field="label">
+                            ${i > 0 ? `<button class="btn-icon" onclick="moveItem('metrics',${i},-1)" title="Move up"><i class="fas fa-arrow-up"></i></button>` : ''}
+                            ${i < data.metrics.length - 1 ? `<button class="btn-icon" onclick="moveItem('metrics',${i},1)" title="Move down"><i class="fas fa-arrow-down"></i></button>` : ''}
+                            <button class="btn-icon btn-danger" onclick="removeMetric(${i})"><i class="fas fa-trash"></i></button>
+                        </div>`).join('')}
+                    ${data.metrics.length === 0 ? '<p class="empty-msg">No metrics added yet.</p>' : ''}
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="saveMetrics()"><i class="fas fa-check"></i> Apply Changes</button>
+        `;
+    }
+
+    function saveMetrics() {
+        data.metrics = [];
+        document.querySelectorAll('#metric-items .inline-group').forEach(row => {
+            data.metrics.push({
+                value: row.querySelector('[data-field="value"]').value.trim(),
+                label: row.querySelector('[data-field="label"]').value.trim()
+            });
+        });
+        persistDraft();
+        showToast('Metrics saved');
+    }
+
+    window.addMetric = function() { data.metrics.push({ value: '', label: '' }); renderMetricsEditor(); };
+    window.removeMetric = function(i) { data.metrics.splice(i, 1); renderMetricsEditor(); };
+
+    // ─── SKILLS ─────────────────────────────────────────
+    function renderSkillsEditor() {
+        if (!data.skills) data.skills = [];
+        editorArea.innerHTML = `
+            <div class="editor-card">
+                <div class="card-header-flex">
+                    <h3>Technical Expertise <span class="hint">Skill categories shown in the "Technical Expertise" section</span></h3>
+                    <button class="btn btn-sm btn-outline" onclick="addSkillCategory()"><i class="fas fa-plus"></i> Add Category</button>
+                </div>
+                <div id="skill-items">
+                    ${data.skills.map((cat, i) => `
+                        <div class="list-card" data-idx="${i}">
+                            <div class="list-card-header">
+                                <strong>${cat.category || 'New Category'}</strong>
+                                <div class="list-card-actions">
+                                    ${i > 0 ? `<button class="btn-icon" onclick="moveItem('skills',${i},-1)" title="Move up"><i class="fas fa-arrow-up"></i></button>` : ''}
+                                    ${i < data.skills.length - 1 ? `<button class="btn-icon" onclick="moveItem('skills',${i},1)" title="Move down"><i class="fas fa-arrow-down"></i></button>` : ''}
+                                    <button class="btn-icon btn-danger" onclick="removeSkillCategory(${i})"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Category Name</label>
+                                <input type="text" value="${esc(cat.category)}" data-field="category" placeholder="e.g. AI & Machine Learning">
+                            </div>
+                            <div class="form-group">
+                                <label>Items (comma-separated)</label>
+                                <textarea rows="2" data-field="items">${esc((cat.items || []).join(', '))}</textarea>
+                            </div>
+                        </div>`).join('')}
+                    ${data.skills.length === 0 ? '<p class="empty-msg">No skill categories added yet.</p>' : ''}
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="saveSkills()"><i class="fas fa-check"></i> Apply Changes</button>
+        `;
+    }
+
+    function saveSkills() {
+        data.skills = [];
+        document.querySelectorAll('#skill-items .list-card').forEach(card => {
+            const itemsRaw = card.querySelector('[data-field="items"]').value.trim();
+            data.skills.push({
+                category: card.querySelector('[data-field="category"]').value.trim(),
+                items: itemsRaw ? itemsRaw.split(',').map(s => s.trim()).filter(Boolean) : []
+            });
+        });
+        persistDraft();
+        showToast('Skills saved');
+    }
+
+    window.addSkillCategory = function() { data.skills.push({ category: '', items: [] }); renderSkillsEditor(); };
+    window.removeSkillCategory = function(i) { data.skills.splice(i, 1); renderSkillsEditor(); };
 
     // ─── NEWS ───────────────────────────────────────────
     function renderNewsEditor() {
@@ -635,8 +736,20 @@
                                 <input type="text" value="${esc(p.tagline)}" data-field="tagline">
                             </div>
                             <div class="form-group">
-                                <label>Description</label>
-                                <textarea rows="3" data-field="description">${esc(p.description)}</textarea>
+                                <label>Challenge <span class="hint">(What problem are you solving?)</span></label>
+                                <textarea rows="2" data-field="challenge">${esc(p.challenge || '')}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Approach <span class="hint">(How do you solve it?)</span></label>
+                                <textarea rows="2" data-field="approach">${esc(p.approach || '')}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Description <span class="hint">(fallback if no challenge/approach)</span></label>
+                                <textarea rows="2" data-field="description">${esc(p.description)}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Impact Highlights <span class="hint">(comma-separated, shown as ✅ checkmarks)</span></label>
+                                <input type="text" value="${esc((p.impact || []).join(', '))}" data-field="impact" placeholder="e.g. CHF 599K funded, Multi-agent pipeline, Real-time decision support">
                             </div>
                             <div class="form-group">
                                 <label>Tech Tags (comma separated)</label>
@@ -658,23 +771,29 @@
         document.querySelectorAll('#proj-items .list-card').forEach(card => {
             let links = [];
             try { links = JSON.parse(card.querySelector('[data-field="links"]').value); } catch(e) {}
-            data.projects.push({
+            const impactRaw = card.querySelector('[data-field="impact"]').value.trim();
+            const impact = impactRaw ? impactRaw.split(',').map(s => s.trim()).filter(Boolean) : [];
+            const proj = {
                 badge: card.querySelector('[data-field="badge"]').value.trim(),
                 status: card.querySelector('[data-field="status"]').value,
                 icon: card.querySelector('[data-field="icon"]').value.trim(),
                 title: card.querySelector('[data-field="title"]').value.trim(),
                 tagline: card.querySelector('[data-field="tagline"]').value.trim(),
+                challenge: card.querySelector('[data-field="challenge"]').value.trim(),
+                approach: card.querySelector('[data-field="approach"]').value.trim(),
                 description: card.querySelector('[data-field="description"]').value.trim(),
+                impact,
                 tech: card.querySelector('[data-field="tech"]').value.split(',').map(s => s.trim()).filter(Boolean),
                 links
-            });
+            };
+            data.projects.push(proj);
         });
         persistDraft();
         showToast('Projects saved');
     }
 
     window.addProject = function() {
-        data.projects.push({ badge: '', status: 'Ongoing', icon: 'fas fa-folder', title: '', tagline: '', description: '', tech: [], links: [] });
+        data.projects.push({ badge: '', status: 'Ongoing', icon: 'fas fa-folder', title: '', tagline: '', challenge: '', approach: '', description: '', impact: [], tech: [], links: [] });
         renderProjectsEditor();
     };
     window.removeProject = function(i) { data.projects.splice(i, 1); renderProjectsEditor(); };
