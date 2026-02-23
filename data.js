@@ -342,8 +342,7 @@ const siteData = {
             "description": "DIZH 4th Project Call (2024). Leading the development of AI-driven multi-modal exploration tools for clinical decision-making in radiology. PI together with Prof. Michael Krauthammer.",
             "tech": [
                 "DIZH",
-                "CHF 599",
-                "000",
+                "CHF 599k",
                 "Medical AI",
                 "Radiology"
             ],
@@ -364,8 +363,7 @@ const siteData = {
             "description": "DIZH Rapid Action Call (2024). Developing trustworthy and reliable AI assistance tools for radiology with emphasis on safety, explainability, and clinical relevance.",
             "tech": [
                 "DIZH",
-                "CHF 150",
-                "000",
+                "CHF 150k",
                 "Trustworthy AI"
             ],
             "links": [
@@ -422,8 +420,7 @@ const siteData = {
             "description": "Hasler Foundation Responsible AI Program (2024). Developing reliable multilingual and cross-lingual natural language interfaces for open data exploration.",
             "tech": [
                 "Hasler",
-                "CHF 48",
-                "000",
+                "CHF 48k",
                 "Multilingual NLP"
             ],
             "links": []

@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=19">
+    <link rel="stylesheet" href="style.css?v=20">
 </head>
 <body>
     <!-- Navigation -->
@@ -48,6 +48,10 @@
                 <p class="hero-affiliation" id="hero-affiliation"></p>
                 <p class="hero-tagline" id="hero-tagline"></p>
                 <div class="hero-links" id="hero-links"></div>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn-primary-cta"><i class="fas fa-briefcase"></i> View Portfolio</a>
+                    <a href="#publications" class="btn-secondary-cta"><i class="fas fa-book"></i> Publications</a>
+                </div>
             </div>
             <div class="hero-image" id="hero-image"></div>
         </div>
@@ -65,8 +69,16 @@
         </div>
     </section>
 
+    <!-- Skills & Tech Stack -->
+    <section id="skills" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Technical Expertise</h2>
+            <div class="skills-grid" id="skills-grid"></div>
+        </div>
+    </section>
+
     <!-- News Section -->
-    <section id="news" class="section section-alt">
+    <section id="news" class="section">
         <div class="container">
             <h2 class="section-title">News</h2>
             <div class="news-feed" id="news-feed"></div>
@@ -74,7 +86,7 @@
     </section>
 
     <!-- Research Pillars -->
-    <section id="research" class="section">
+    <section id="research" class="section section-alt">
         <div class="container">
             <h2 class="section-title">Research</h2>
             <p class="section-subtitle">Core research areas spanning multimodal understanding, multilingual systems, and clinical AI.</p>
@@ -83,7 +95,7 @@
     </section>
 
     <!-- Publications Section -->
-    <section id="publications" class="section section-alt">
+    <section id="publications" class="section">
         <div class="container">
             <h2 class="section-title">Selected Publications</h2>
             <p class="section-subtitle">For a complete list, see <a id="pub-scholar-link" href="#" target="_blank">Google Scholar</a>.</p>
@@ -99,16 +111,16 @@
     </section>
 
     <!-- Projects & Grants Section -->
-    <section id="projects" class="section">
+    <section id="projects" class="section section-alt">
         <div class="container">
-            <h2 class="section-title">Projects &amp; Grants</h2>
-            <p class="section-subtitle">Active research initiatives — PI or Co-Lead on over CHF 2M in funding.</p>
+            <h2 class="section-title">Portfolio — Projects &amp; Grants</h2>
+            <p class="section-subtitle">Case studies of research initiatives I lead — PI or Co-Lead on over CHF 2M in funding.</p>
             <div class="projects-grid" id="projects-grid"></div>
         </div>
     </section>
 
     <!-- Experience & Education Section -->
-    <section id="experience" class="section section-alt">
+    <section id="experience" class="section">
         <div class="container">
             <h2 class="section-title">Experience &amp; Education</h2>
             <div class="timeline" id="timeline"></div>
@@ -116,7 +128,7 @@
     </section>
 
     <!-- Teaching & Supervision Section -->
-    <section id="teaching" class="section">
+    <section id="teaching" class="section section-alt">
         <div class="container">
             <h2 class="section-title">Teaching &amp; Supervision</h2>
             <div id="teaching-content"></div>
@@ -124,7 +136,7 @@
     </section>
 
     <!-- Talks & Service Section -->
-    <section id="talks" class="section section-alt">
+    <section id="talks" class="section">
         <div class="container">
             <h2 class="section-title">Talks &amp; Service</h2>
             <div id="talks-content"></div>
@@ -148,7 +160,7 @@
     <!-- Back to Top Button -->
     <button id="backToTop" title="Back to top"><i class="fas fa-arrow-up"></i></button>
 
-    <script src="data.js?v=8"></script>
-    <script src="script.js?v=22"></script>
+    <script src="data.js?v=9"></script>
+    <script src="script.js?v=23"></script>
 </body>
 </html>

@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof siteData !== 'undefined') {
         if (document.getElementById('hero-name')) renderHero();
         if (document.getElementById('about-text')) renderAbout();
+        if (document.getElementById('skills-grid')) renderSkills();
         if (document.getElementById('news-feed')) renderNews();
         if (document.getElementById('research-grid')) renderResearch();
         if (document.getElementById('publications-table')) renderPublications();
@@ -92,6 +93,18 @@ function renderAbout() {
                 <i class="${h.icon}"></i>
                 <h3>${h.title}</h3>
                 <p>${h.text}</p>
+            </div>`).join('');
+}
+
+function renderSkills() {
+    if (!siteData.skills) return;
+    document.getElementById('skills-grid').innerHTML =
+        siteData.skills.map(cat => `
+            <div class="skill-category">
+                <h3 class="skill-category-title">${cat.category}</h3>
+                <div class="skill-tags">
+                    ${cat.items.map(item => `<span class="skill-tag">${item}</span>`).join('')}
+                </div>
             </div>`).join('');
 }
 
@@ -218,14 +231,26 @@ function renderProjects() {
                 statusHTML = `<div class="project-status ${statusClass}">${statusLabel}</div>`;
             }
 
+            const impactHTML = (proj.impact || []).map(imp => `<li><i class="fas fa-check"></i> ${imp}</li>`).join('');
+
+            // Case-study layout: challenge → approach → impact
+            const caseStudyHTML = (proj.challenge || proj.approach) ? `
+                <div class="project-case-study">
+                    ${proj.challenge ? `<div class="case-block"><span class="case-label">Challenge</span><p>${proj.challenge}</p></div>` : ''}
+                    ${proj.approach ? `<div class="case-block"><span class="case-label">Approach</span><p>${proj.approach}</p></div>` : ''}
+                    ${impactHTML ? `<div class="case-block"><span class="case-label">Impact</span><ul class="impact-list">${impactHTML}</ul></div>` : ''}
+                </div>` : `<p>${proj.description}</p>`;
+
             return `
             <div class="project-card featured${i >= PROJ_VISIBLE ? ' section-overflow' : ''}" data-section="projects"${i >= PROJ_VISIBLE ? ' data-overflow' : ''}>
-                <div class="project-badge">${proj.badge}</div>
-                ${statusHTML}
+                <div class="project-header">
+                    <div class="project-badge">${proj.badge}</div>
+                    ${statusHTML}
+                </div>
                 <div class="project-icon"><i class="${proj.icon}"></i></div>
                 <h3>${proj.title}</h3>
                 <p class="project-tagline">${proj.tagline}</p>
-                <p>${proj.description}</p>
+                ${caseStudyHTML}
                 <div class="project-tech">${techHTML}</div>
                 ${linksHTML ? `<div class="project-links">${linksHTML}</div>` : ''}
             </div>`;
@@ -709,14 +734,14 @@ function initAnimations() {
     // Section-level animation — animate containers, not individual items
     const selectors = [
         '.about-content',
+        '.skills-grid',
         '.news-feed',
         '.research-grid',
         '.publications-table',
         '.projects-grid',
         '.timeline',
         '#teaching-content',
-        '#talks-content',
-        '.contact-grid'
+        '#talks-content'
     ];
 
     selectors.forEach(selector => {
