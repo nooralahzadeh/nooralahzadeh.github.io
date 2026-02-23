@@ -5,11 +5,12 @@
     ===================================================== */
 
 const siteData = {
-    "_dataVersion": 8,
+    "_dataVersion": 10,
     "personal": {
         "name": "Farhad Nooralahzadeh",
         "title": "Lecturer (Dozent) & Senior Researcher",
         "affiliation": "ZHAW · University of Zurich",
+        "tagline": "Building intelligent systems at the intersection of multimodal understanding, multilingual NLP, and clinical AI.",
         "photo": "assets/figures/NOOR_31208-modified.jpg",
         "emails": [
             {
@@ -25,6 +26,30 @@ const siteData = {
         },
         "location": "Zurich, Switzerland"
     },
+    "metrics": [
+        { "value": "23+", "label": "Publications" },
+        { "value": "700+", "label": "Citations" },
+        { "value": "CHF 2M+", "label": "Funding (PI/Co-PI)" },
+        { "value": "14+", "label": "Students Supervised" }
+    ],
+    "skills": [
+        {
+            "category": "AI & Machine Learning",
+            "items": ["Vision-Language Models", "Large Language Models", "Reinforcement Learning (GRPO)", "Sparse Autoencoders", "Meta-Learning", "Few-Shot Learning", "Transfer Learning"]
+        },
+        {
+            "category": "NLP & Multilingual",
+            "items": ["Text-to-SQL", "Information Extraction", "Cross-lingual Transfer", "Visual Question Answering", "Report Generation", "Named Entity Recognition"]
+        },
+        {
+            "category": "Frameworks & Tools",
+            "items": ["PyTorch", "HuggingFace Transformers", "LangGraph", "LangChain", "vLLM", "DeepSpeed", "Docker", "SLURM"]
+        },
+        {
+            "category": "Platforms & Infrastructure",
+            "items": ["CSCS Alps (Swiss National Supercomputer)", "AWS", "Weights & Biases", "MLflow", "Git / GitHub Actions"]
+        }
+    ],
     "about": {
         "paragraphs": [
             "I am a <strong>Lecturer (Dozent)</strong> at the Intelligent Information Systems group at the <strong>Zurich University of Applied Sciences (ZHAW)</strong> and a <strong>Senior Researcher</strong> (NLP Group Leader) at the <strong>University of Zurich (UZH)</strong>.",
@@ -339,7 +364,10 @@ const siteData = {
             "icon": "fas fa-x-ray",
             "title": "RADICAL",
             "tagline": "Radiology AI-Driven Clinical Decision-making with Multi-modal Exploration",
-            "description": "DIZH 4th Project Call (2024). Leading the development of AI-driven multi-modal exploration tools for clinical decision-making in radiology. PI together with Prof. Michael Krauthammer.",
+            "challenge": "Clinicians need intelligent tools that combine multi-modal data sources to support complex diagnostic decisions in radiology.",
+            "approach": "Developing AI-driven multi-modal exploration tools integrating vision-language models, agentic reasoning, and clinical workflows.",
+            "description": "DIZH 4th Project Call (2024). PI together with Prof. Michael Krauthammer.",
+            "impact": ["CHF 599K funded", "Multi-agent clinical pipeline", "Real-time decision support"],
             "tech": [
                 "DIZH",
                 "CHF 599k",
@@ -360,7 +388,10 @@ const siteData = {
             "icon": "fas fa-hospital",
             "title": "TRUST-RAD",
             "tagline": "Trustworthy Medical AI Assistant Tools for Radiology",
-            "description": "DIZH Rapid Action Call (2024). Developing trustworthy and reliable AI assistance tools for radiology with emphasis on safety, explainability, and clinical relevance.",
+            "challenge": "Medical VLMs hallucinate clinical findings, posing patient safety risks. Need interpretable methods to detect and mitigate these failures.",
+            "approach": "Applied Sparse Autoencoders for mechanistic interpretability and inference-time hallucination steering in RadVLM, LLaVA-Med, and MedGemma.",
+            "description": "DIZH Rapid Action Call (2024). PI.",
+            "impact": ["CHF 150K funded", "SAE-based hallucination mitigation", "3 VLMs benchmarked"],
             "tech": [
                 "DIZH",
                 "CHF 150k",
@@ -378,9 +409,12 @@ const siteData = {
             "badge": "Co-Lead",
             "status": "Ongoing",
             "icon": "fas fa-brain",
-            "title": "3D Vision-Language Model for Radiology & Swiss-AI Initiative (Large Grant)",
+            "title": "RadVLM & Swiss-AI Initiative",
             "tagline": "Foundation Model for Health — Multimodal LLM for Radiology",
-            "description": "Co-leading the Swiss-AI initiative on foundation models for health. Developing RadVLM, a multitask conversational VLM for radiology built on Qwen-VL, including 3D vision-language models, Agent Systems and GRPO-based optimization.",
+            "challenge": "Existing medical VLMs lack multitask capabilities, 3D understanding, and factual accuracy for real clinical deployment.",
+            "approach": "Built RadVLM on Qwen-VL, trained on 500K+ radiology pairs at Swiss National Supercomputer (CSCS Alps). Applied GRPO reinforcement learning to reduce hallucinations.",
+            "description": "Co-leading the Swiss-AI initiative on foundation models for health.",
+            "impact": ["500K GPU-hours on CSCS Alps", "Model on PhysioNet", "MIDL 2026 paper accepted"],
             "tech": [
                 "Swiss-AI",
                 "500k GPUh",
@@ -416,12 +450,16 @@ const siteData = {
             "status": "Completed",
             "icon": "fas fa-globe",
             "title": "MuLi",
-            "tagline": "Reliable Multi-lingual and Cross-lingual Open Data Exploration in Natural Language",
-            "description": "Hasler Foundation Responsible AI Program (2024). Developing reliable multilingual and cross-lingual natural language interfaces for open data exploration.",
+            "tagline": "Reliable Multilingual Open Data Exploration in Natural Language",
+            "challenge": "Existing Text-to-SQL systems fail on multilingual queries and lack robustness for real-world open data portals.",
+            "approach": "Built StatBot.Swiss — a multilingual chatbot for Swiss open data using fine-tuned LLMs with cross-lingual transfer for Text-to-SQL.",
+            "description": "Hasler Foundation Responsible AI Program (2024). PI.",
+            "impact": ["CHF 48K funded", "Published at ACL 2024", "4 languages supported"],
             "tech": [
                 "Hasler",
                 "CHF 48k",
-                "Multilingual NLP"
+                "Multilingual NLP",
+                "Text-to-SQL"
             ],
             "links": []
         },
@@ -430,12 +468,16 @@ const siteData = {
             "status": "Ongoing",
             "icon": "fas fa-search",
             "title": "DataGEMS",
-            "tagline": "Data Discovery Platform with Generalized Exploratory, Management, and Search Capabilities",
-            "description": "Horizon Europe funded project. Co-leading WP2 and WP3 on data exploration and search capabilities. Co-PI with Prof. Kurt Stockinger.",
+            "tagline": "Data Discovery with Generalized Exploratory, Management, and Search",
+            "challenge": "Organizations struggle to discover, explore, and link heterogeneous datasets across languages and modalities at scale.",
+            "approach": "Building multi-modal agentic data exploration pipelines using LangGraph, LLM Compiler, and cross-lingual retrieval for open data platforms.",
+            "description": "Horizon Europe funded project. Co-leading WP2 and WP3. Co-PI with Prof. Kurt Stockinger.",
+            "impact": ["EUR 8.16M total budget", "Pan-European consortium", "WP2 & WP3 lead"],
             "tech": [
                 "Horizon Europe",
                 "EUR 8.16M",
-                "Data Discovery"
+                "Data Discovery",
+                "LangGraph"
             ],
             "links": [
                 {
@@ -450,8 +492,11 @@ const siteData = {
             "status": "Ongoing",
             "icon": "fas fa-lock",
             "title": "M2P2",
-            "tagline": "Medical, Multilingual and Privacy-Preserving NLP in the Clinical Domain",
-            "description": "SNSF / HORIZON funded project. Medical, multilingual, and privacy-preserving NLP for clinical applications. Co-PI with Prof. Michael Krauthammer.",
+            "tagline": "Medical, Multilingual and Privacy-Preserving NLP",
+            "challenge": "Clinical NLP models need to work across languages while respecting strict data privacy regulations in healthcare.",
+            "approach": "Federated learning and privacy-preserving training for medical NLP across multilingual clinical corpora.",
+            "description": "SNSF / HORIZON funded project. Co-PI with Prof. Michael Krauthammer.",
+            "impact": ["CHF 1.07M funded", "Cross-institutional collaboration", "Privacy-preserving NLP"],
             "tech": [
                 "SNSF",
                 "CHF 1.07M",
