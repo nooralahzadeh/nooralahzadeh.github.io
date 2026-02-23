@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery — Farhad Nooralahzadeh</title>
+    <meta name="description" content="Photos from conferences, talks, courses, and events — Farhad Nooralahzadeh.">
+    <script>
+        (function(){var t=localStorage.getItem('siteTheme');if(t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark')}})();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=19">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar" class="scrolled">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">FN</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#news">News</a></li>
+                <li><a href="index.html#research">Research</a></li>
+                <li><a href="index.html#publications">Publications</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#experience">Experience</a></li>
+                <li><a href="index.html#talks">Talks &amp; Service</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a id="nav-scholar-link" href="#" target="_blank" class="nav-external"><i class="fas fa-graduation-cap"></i></a></li>
+                <li><button class="theme-toggle" id="themeToggle" title="Toggle dark mode"><i class="fas fa-moon"></i></button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Gallery Page Header -->
+    <section class="section" style="padding-top: 120px;">
+        <div class="container">
+            <h2 class="section-title">Gallery</h2>
+            <p class="section-subtitle">Moments from conferences, talks, courses, and collaborations.</p>
+            <div class="gallery-filters" id="gallery-filters">
+                <button class="filter-btn active" data-gallery-filter="all">All</button>
+                <button class="filter-btn" data-gallery-filter="conference">Conferences</button>
+                <button class="filter-btn" data-gallery-filter="teaching">Teaching</button>
+                <button class="filter-btn" data-gallery-filter="event">Events</button>
+            </div>
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Farhad Nooralahzadeh</p>
+        </div>
+    </footer>
+
+    <!-- Gallery Lightbox -->
+    <div class="gallery-lightbox" id="galleryLightbox">
+        <button class="gallery-lightbox-close" id="lightboxClose"><i class="fas fa-times"></i></button>
+        <img src="" alt="" id="lightboxImg">
+        <div class="gallery-lightbox-caption" id="lightboxCaption"></div>
+    </div>
+
+    <script src="data.js?v=8"></script>
+    <script src="script.js?v=22"></script>
+    <script>
+        // Set scholar link in nav
+        const navScholar = document.getElementById('nav-scholar-link');
+        if (navScholar && siteData.personal.links.scholar) {
+            navScholar.href = siteData.personal.links.scholar;
+        }
+    </script>
+</body>
+</html>

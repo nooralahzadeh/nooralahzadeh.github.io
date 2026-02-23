@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Editor — Farhad Nooralahzadeh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-pen-nib"></i> Site Editor</h2>
+                <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="sidebar-link active" data-section="personal"><i class="fas fa-user"></i> Personal Info</a>
+                <a href="#" class="sidebar-link" data-section="about"><i class="fas fa-info-circle"></i> About</a>
+                <a href="#" class="sidebar-link" data-section="news"><i class="fas fa-newspaper"></i> News</a>
+                <a href="#" class="sidebar-link" data-section="research"><i class="fas fa-microscope"></i> Research</a>
+                <a href="#" class="sidebar-link" data-section="publications"><i class="fas fa-book"></i> Publications</a>
+                <a href="#" class="sidebar-link" data-section="projects"><i class="fas fa-project-diagram"></i> Projects & Grants</a>
+                <a href="#" class="sidebar-link" data-section="experience"><i class="fas fa-briefcase"></i> Experience</a>
+                <a href="#" class="sidebar-link" data-section="teaching"><i class="fas fa-chalkboard-teacher"></i> Teaching</a>
+                <a href="#" class="sidebar-link" data-section="students"><i class="fas fa-user-graduate"></i> Students</a>
+                <a href="#" class="sidebar-link" data-section="talks"><i class="fas fa-microphone-alt"></i> Talks</a>
+                <a href="#" class="sidebar-link" data-section="awards"><i class="fas fa-trophy"></i> Awards</a>
+                <a href="#" class="sidebar-link" data-section="service"><i class="fas fa-users-cog"></i> Service</a>
+                <a href="#" class="sidebar-link" data-section="gallery"><i class="fas fa-images"></i> Gallery</a>
+            </nav>
+            <div class="sidebar-actions">
+                <button class="btn btn-primary" id="btnSave"><i class="fas fa-download"></i> Export data.js</button>
+                <button class="btn btn-secondary" id="btnPreview"><i class="fas fa-eye"></i> Preview Site</button>
+                <button class="btn btn-outline btn-sm" id="btnReset" style="margin-top:4px;color:#dc2626;border-color:#dc2626"><i class="fas fa-undo"></i> Reset to original</button>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <main class="main-content">
+            <header class="main-header">
+                <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+                <h1 id="sectionTitle">Personal Info</h1>
+                <div class="header-actions">
+                    <button class="btn btn-sm btn-primary" id="btnSaveTop"><i class="fas fa-download"></i> Export data.js</button>
+                </div>
+            </header>
+
+            <div class="editor-area" id="editorArea">
+                <!-- Dynamic content inserted here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Draft banner (shown only when NOT using dev server) -->
+    <div class="draft-banner" id="draftBanner" style="display:none">
+        <i class="fas fa-info-circle"></i>
+        <span>Draft saved in browser only. Run <code style="background:#dbeafe;padding:2px 6px;border-radius:4px">python3 serve.py</code> to auto-save data.js, or click <strong>Export data.js</strong> to download manually.</span>
+    </div>
+
+    <!-- Toast notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="data.js?v=8"></script>
+    <script>
+    /* ==========================================================
+       ADMIN EDITOR — Visual editor for data.js
+       ========================================================== */
+
+    // Load from localStorage if saved, otherwise from data.js
+    // Version check: if data.js has a newer _dataVersion, discard the stale draft
+    const STORAGE_KEY = 'siteDataDraft';
+    let data;
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+        try {
+            const draft = JSON.parse(saved);
+            const fileVersion = siteData._dataVersion || 0;
+            const draftVersion = draft._dataVersion || 0;
+            if (draftVersion < fileVersion) {
+                console.log(`[Admin] data.js updated (v${fileVersion} > draft v${draftVersion}). Loading fresh data.`);
+                data = JSON.parse(JSON.stringify(siteData));
+                localStorage.removeItem(STORAGE_KEY);
+            } else {
+                data = draft;
+                console.log('[Admin] Loaded draft from localStorage (v' + draftVersion + ')');
+            }
+        } catch (e) {
+            data = JSON.parse(JSON.stringify(siteData));
+        }
+    } else {
+        data = JSON.parse(JSON.stringify(siteData));
+    }
+
+    // Persist to localStorage AND write data.js via dev server
+    function persistDraft() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+
+        // Try to save data.js through the local dev server
+        fetch('/save-data', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(r => r.json())
+        .then(res => {
+            if (res.ok) {
+                document.getElementById('draftBanner').style.display = 'none';
+                console.log('[Admin] data.js saved to disk');
+            }
+        })
+        .catch(() => {
+            // Not running via dev server — show draft banner
+            document.getElementById('draftBanner').style.display = '';
+            console.log('[Admin] Saved to localStorage only (run serve.py for auto-save to data.js)');
+        });
+    }
+
+    const editorArea = document.getElementById('editorArea');
+    const sectionTitle = document.getElementById('sectionTitle');
+
+    // ─── Sidebar navigation ─────────────────────────────
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            const section = link.dataset.section;
+            sectionTitle.textContent = link.textContent.trim();
+            renderSection(section);
+            // Close sidebar on mobile
+            document.getElementById('sidebar').classList.remove('open');
+        });
+    });
+
+    // Mobile menu
+    document.getElementById('menuToggle').addEventListener('click', () => {
+        document.getElementById('sidebar').classList.toggle('open');
+    });
+    document.getElementById('sidebarClose').addEventListener('click', () => {
+        document.getElementById('sidebar').classList.remove('open');
+    });
+
+    // Save / Preview buttons
+    document.getElementById('btnSave').addEventListener('click', downloadDataJS);
+    document.getElementById('btnSaveTop').addEventListener('click', downloadDataJS);
+    document.getElementById('btnPreview').addEventListener('click', () => {
+        window.open('index.html', '_blank');
+    });
+
+    document.getElementById('btnReset').addEventListener('click', () => {
+        if (confirm('Reset all changes and revert to the original data.js? This cannot be undone.')) {
+            localStorage.removeItem(STORAGE_KEY);
+            data = JSON.parse(JSON.stringify(siteData));
+            renderSection('personal');
+            document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+            document.querySelector('.sidebar-link[data-section="personal"]').classList.add('active');
+            sectionTitle.textContent = 'Personal Info';
+            document.getElementById('draftBanner').style.display = 'none';
+            showToast('Reset to original data.js');
+        }
+    });
+
+    // ─── Section Renderers ──────────────────────────────
+    function renderSection(section) {
+        const renderers = {
+            personal: renderPersonalEditor,
+            about: renderAboutEditor,
+            news: renderNewsEditor,
+            research: renderResearchEditor,
+            publications: renderPublicationsEditor,
+            projects: renderProjectsEditor,
+            experience: renderExperienceEditor,
+            teaching: renderTeachingEditor,
+            students: renderStudentsEditor,
+            talks: renderTalksEditor,
+            awards: renderAwardsEditor,
+            service: renderServiceEditor,
+            gallery: renderGalleryEditor
+        };
+        (renderers[section] || renderers.personal)();
+    }
+
+    // ─── PERSONAL INFO ──────────────────────────────────
+    function renderPersonalEditor() {
+        const d = data.personal;
+        editorArea.innerHTML = `
+            <div class="editor-card">
+                <h3>Basic Information</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="p-name" value="${esc(d.name)}">
+                    </div>
+                    <div class="form-group">
+                        <label>Title / Role</label>
+                        <input type="text" id="p-title" value="${esc(d.title)}">
+                    </div>
+                    <div class="form-group">
+                        <label>Affiliation</label>
+                        <input type="text" id="p-affiliation" value="${esc(d.affiliation)}">
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" id="p-location" value="${esc(d.location || '')}" placeholder="e.g. Zurich, Switzerland">
+                    </div>
+                    <div class="form-group">
+                        <label>Photo URL (leave empty for placeholder)</label>
+                        <input type="text" id="p-photo" value="${esc(d.photo)}" placeholder="e.g. assets/profile.jpg">
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-card">
+                <h3>Email Addresses</h3>
+                <div id="emails-list">
+                    ${d.emails.map((e, i) => `
+                        <div class="inline-group" data-idx="${i}">
+                            <input type="text" placeholder="Label" value="${esc(e.label)}" data-field="label">
+                            <input type="email" placeholder="Email" value="${esc(e.address)}" data-field="address">
+                            <button class="btn-icon btn-danger" onclick="removeEmail(${i})"><i class="fas fa-trash"></i></button>
+                        </div>`).join('')}
+                </div>
+                <button class="btn btn-sm btn-outline" onclick="addEmail()"><i class="fas fa-plus"></i> Add Email</button>
+            </div>
+
+            <div class="editor-card">
+                <h3>Links</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label><i class="fas fa-graduation-cap"></i> Google Scholar</label>
+                        <input type="url" id="p-scholar" value="${esc(d.links.scholar)}">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fab fa-github"></i> GitHub</label>
+                        <input type="url" id="p-github" value="${esc(d.links.github)}">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fab fa-linkedin-in"></i> LinkedIn</label>
+                        <input type="url" id="p-linkedin" value="${esc(d.links.linkedin)}">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fab fa-x-twitter"></i> Twitter / X (leave empty to hide)</label>
+                        <input type="url" id="p-twitter" value="${esc(d.links.twitter)}">
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="savePersonal()"><i class="fas fa-check"></i> Apply Changes</button>
+        `;
+    }
+
+    function savePersonal() {
+        data.personal.name = val('p-name');
+        data.personal.title = val('p-title');
+        data.personal.affiliation = val('p-affiliation');
+        data.personal.location = val('p-location');
+        data.personal.photo = val('p-photo');
+        data.personal.links.scholar = val('p-scholar');
+        data.personal.links.github = val('p-github');
+        data.personal.links.linkedin = val('p-linkedin');
+        data.personal.links.twitter = val('p-twitter');
+
+        // Emails
+        data.personal.emails = [];
+        document.querySelectorAll('#emails-list .inline-group').forEach(row => {
+            const label = row.querySelector('[data-field="label"]').value.trim();
+            const address = row.querySelector('[data-field="address"]').value.trim();
+            if (label && address) data.personal.emails.push({ label, address });
+        });
+        persistDraft();
+        showToast('Personal info saved');
+    }
+
+    window.addEmail = function() {
+        data.personal.emails.push({ label: '', address: '' });
+        renderPersonalEditor();
+    };
+    window.removeEmail = function(i) {
+        data.personal.emails.splice(i, 1);
+        renderPersonalEditor();
+    };
+
+    // ─── ABOUT ──────────────────────────────────────────
+    function renderAboutEditor() {
+        const d = data.about;
+        editorArea.innerHTML = `
+            <div class="editor-card">
+                <h3>About Paragraphs <span class="hint">HTML allowed (e.g. &lt;strong&gt;, &lt;em&gt;, &lt;a&gt;)</span></h3>
+                <div id="about-paragraphs">
+                    ${d.paragraphs.map((p, i) => `
+                        <div class="form-group">
+                            <label>Paragraph ${i + 1}
+                                <button class="btn-icon btn-danger float-right" onclick="removeAboutParagraph(${i})"><i class="fas fa-trash"></i></button>
+                            </label>
+                            <textarea rows="4" data-idx="${i}">${esc(p)}</textarea>
+                        </div>`).join('')}
+                </div>
+                <button class="btn btn-sm btn-outline" onclick="addAboutParagraph()"><i class="fas fa-plus"></i> Add Paragraph</button>
+            </div>
+
+            <div class="editor-card">
+                <h3>Highlight Cards</h3>
+                <div id="about-highlights">
+                    ${d.highlights.map((h, i) => `
+                        <div class="card-group" data-idx="${i}">
+                            <div class="card-group-header">
+                                <strong>Card ${i + 1}</strong>
+                                <button class="btn-icon btn-danger" onclick="removeHighlight(${i})"><i class="fas fa-trash"></i></button>
+                            </div>
+                            <div class="form-grid-3">
+                                <div class="form-group">
+                                    <label>Icon (FA class)</label>
+                                    <input type="text" value="${esc(h.icon)}" data-field="icon">
+                                </div>
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input type="text" value="${esc(h.title)}" data-field="title">
+                                </div>
+                                <div class="form-group">
+                                    <label>Text</label>
+                                    <input type="text" value="${esc(h.text)}" data-field="text">
+                                </div>
+                            </div>
+                        </div>`).join('')}
+                </div>
+                <button class="btn btn-sm btn-outline" onclick="addHighlight()"><i class="fas fa-plus"></i> Add Card</button>
+            </div>
+            <button class="btn btn-primary" onclick="saveAbout()"><i class="fas fa-check"></i> Apply Changes</button>
+        `;
+    }
+
+    function saveAbout() {
+        data.about.paragraphs = [];
+        document.querySelectorAll('#about-paragraphs textarea').forEach(ta => {
+            if (ta.value.trim()) data.about.paragraphs.push(ta.value.trim());
+        });
+        data.about.highlights = [];
+        document.querySelectorAll('#about-highlights .card-group').forEach(card => {
+            data.about.highlights.push({
+                icon: card.querySelector('[data-field="icon"]').value.trim(),
+                title: card.querySelector('[data-field="title"]').value.trim(),
+                text: card.querySelector('[data-field="text"]').value.trim()
+            });
+        });
+        persistDraft();
+        showToast('About section saved');
+    }
+
+    window.addAboutParagraph = function() { data.about.paragraphs.push(''); renderAboutEditor(); };
+    window.removeAboutParagraph = function(i) { data.about.paragraphs.splice(i, 1); renderAboutEditor(); };
+    window.addHighlight = function() { data.about.highlights.push({ icon: 'fas fa-star', title: '', text: '' }); renderAboutEditor(); };
+    window.removeHighlight = function(i) { data.about.highlights.splice(i, 1); renderAboutEditor(); };
+
+    // ─── NEWS ───────────────────────────────────────────
+    function renderNewsEditor() {
+        editorArea.innerHTML = `
+            <div class="editor-card">
+                <div class="card-header-flex">
+                    <h3>News Items <span class="hint">Newest first. HTML allowed in text.</span></h3>
+                    <button class="btn btn-sm btn-outline" onclick="addNews()"><i class="fas fa-plus"></i> Add News</button>
+                </div>
+                <div id="news-items">
+                    ${data.news.map((n, i) => `
+                        <div class="list-card" data-idx="${i}">
+                            <div class="list-card-header">
+                                <span class="list-card-badge">${n.month} ${n.year}</span>
+                                <div class="list-card-actions">
+                                    ${i > 0 ? `<button class="btn-icon" onclick="moveItem('news',${i},-1)" title="Move up"><i class="fas fa-arrow-up"></i></button>` : ''}
+                                    ${i < data.news.length - 1 ? `<button class="btn-icon" onclick="moveItem('news',${i},1)" title="Move down"><i class="fas fa-arrow-down"></i></button>` : ''}
+                                    <button class="btn-icon btn-danger" onclick="removeNews(${i})"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-grid-3">
+                                <div class="form-group">
+                                    <label>Month</label>
+                                    <input type="text" value="${esc(n.month)}" data-field="month" placeholder="e.g. Feb">
+                                </div>
+                                <div class="form-group">
+                                    <label>Year</label>
+                                    <input type="text" value="${esc(n.year)}" data-field="year" placeholder="e.g. 2025">
+                                </div>
+                                <div class="form-group">
+                                    <label>Icon</label>
+                                    <select data-field="icon">
+                                        <option value="fas fa-newspaper" ${n.icon === 'fas fa-newspaper' ? 'selected' : ''}>📰 News</option>
+                                        <option value="fas fa-file-alt" ${n.icon === 'fas fa-file-alt' ? 'selected' : ''}>📄 Paper</option>
+                                        <option value="fas fa-trophy" ${n.icon === 'fas fa-trophy' ? 'selected' : ''}>🏆 Award</option>
+                                        <option value="fas fa-users" ${n.icon === 'fas fa-users' ? 'selected' : ''}>👥 Talk</option>
+                                        <option value="fas fa-code" ${n.icon === 'fas fa-code' ? 'selected' : ''}>💻 Code</option>
+                                        <option value="fas fa-bullhorn" ${n.icon === 'fas fa-bullhorn' ? 'selected' : ''}>📢 Announcement</option>
+                                        <option value="fas fa-star" ${n.icon === 'fas fa-star' ? 'selected' : ''}>⭐ Highlight</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Text (HTML allowed)</label>
+                                <textarea rows="3" data-field="text">${esc(n.text)}</textarea>
+                            </div>
+                        </div>`).join('')}
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="saveNews()"><i class="fas fa-check"></i> Apply Changes</button>
+        `;
+    }
+
+    function saveNews() {
+        data.news = [];
+        document.querySelectorAll('#news-items .list-card').forEach(card => {
+            data.news.push({
+                month: card.querySelector('[data-field="month"]').value.trim(),
+                year: card.querySelector('[data-field="year"]').value.trim(),
+                icon: card.querySelector('[data-field="icon"]').value,
+                text: card.querySelector('[data-field="text"]').value.trim()
+            });
+        });
+        persistDraft();
+        showToast('News saved');
+    }
+
+    window.addNews = function() {
+        data.news.unshift({ month: '', year: new Date().getFullYear().toString(), icon: 'fas fa-newspaper', text: '' });
+        renderNewsEditor();
+    };
+    window.removeNews = function(i) { data.news.splice(i, 1); renderNewsEditor(); };
+
+    // ─── RESEARCH ───────────────────────────────────────
+    function renderResearchEditor() {
+        editorArea.innerHTML = `
+            <div class="editor-card">
+                <div class="card-header-flex">
+                    <h3>Research Interests</h3>
+                    <button class="btn btn-sm btn-outline" onclick="addResearch()"><i class="fas fa-plus"></i> Add</button>
+                </div>
+                <div id="research-items">
+                    ${data.research.map((r, i) => `
+                        <div class="list-card" data-idx="${i}">
+                            <div class="list-card-header">
+                                <strong><i class="${r.icon}"></i> ${r.title || 'New Interest'}</strong>
+                                <button class="btn-icon btn-danger" onclick="removeResearch(${i})"><i class="fas fa-trash"></i></button>
+                            </div>
+                            <div class="form-grid-3">
+                                <div class="form-group">
+                                    <label>Icon (FA class)</label>
+                                    <input type="text" value="${esc(r.icon)}" data-field="icon">
+                                </div>
+                                <div class="form-group col-span-2">
+                                    <label>Title</label>
+                                    <input type="text" value="${esc(r.title)}" data-field="title">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea rows="2" data-field="text">${esc(r.text)}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Subtopics (one per line)</label>
+                                <textarea rows="3" data-field="subtopics">${esc((r.subtopics || []).join('\n'))}</textarea>
+                            </div>
+                        </div>`).join('')}
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="saveResearch()"><i class="fas fa-check"></i> Apply Changes</button>
+        `;
+    }
+
+    function saveResearch() {
+        data.research = [];
+        document.querySelectorAll('#research-items .list-card').forEach(card => {
+            const subtopicsRaw = card.querySelector('[data-field="subtopics"]').value.trim();
+            const subtopics = subtopicsRaw ? subtopicsRaw.split('\n').map(s => s.trim()).filter(Boolean) : [];
+            data.research.push({
+                icon: card.querySelector('[data-field="icon"]').value.trim(),
+                title: card.querySelector('[data-field="title"]').value.trim(),
+                text: card.querySelector('[data-field="text"]').value.trim(),
+                subtopics: subtopics
+            });
+        });
+        persistDraft();
+        showToast('Research interests saved');
+    }
+
+    window.addResearch = function() { data.research.push({ icon: 'fas fa-star', title: '', text: '', subtopics: [] }); renderResearchEditor(); };
+    window.removeResearch = function(i) { data.research.splice(i, 1); renderResearchEditor(); };
+
+    // ─── PUBLICATIONS ───────────────────────────────────
+    function renderPublicationsEditor() {
+        editorArea.innerHTML = `
+            <div class="editor-card">
+                <div class="card-header-flex">
+                    <h3>Publications <span class="hint">HTML allowed in authors field.</span></h3>
+                    <button class="btn btn-sm btn-outline" onclick="addPublication()"><i class="fas fa-plus"></i> Add</button>
+                </div>
+                <div id="pub-items">
+                    ${data.publications.map((p, i) => `
+                        <div class="list-card" data-idx="${i}">
+                            <div class="list-card-header">
+                                <strong>${p.title || 'New Publication'}</strong>
+                                <div class="list-card-actions">
+                                    ${i > 0 ? `<button class="btn-icon" onclick="moveItem('publications',${i},-1)"><i class="fas fa-arrow-up"></i></button>` : ''}
+                                    ${i < data.publications.length - 1 ? `<button class="btn-icon" onclick="moveItem('publications',${i},1)"><i class="fas fa-arrow-down"></i></button>` : ''}
+                                    <button class="btn-icon btn-danger" onclick="removePublication(${i})"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input type="text" value="${esc(p.title)}" data-field="title">
+                                </div>
+                                <div class="form-group">
+                                    <label>URL</label>
+                                    <input type="url" value="${esc(p.url)}" data-field="url">
+                                </div>
+                                <div class="form-group">
+                                    <label>Authors (HTML)</label>
+                                    <input type="text" value="${esc(p.authors)}" data-field="authors">
+                                </div>
+                                <div class="form-group">
+                                    <label>Venue</label>
+                                    <input type="text" value="${esc(p.venue)}" data-field="venue">
+                                </div>
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <input type="text" value="${esc(p.category)}" data-field="category" placeholder="e.g. medical-ai, nlp, preprint">
+                                </div>
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <select data-field="role">
+                                        <option value=""${!p.role ? ' selected' : ''}>— None —</option>
+                                        <option value="First Author"${p.role === 'First Author' ? ' selected' : ''}>First Author</option>
+                                        <option value="Senior Author"${p.role === 'Senior Author' ? ' selected' : ''}>Senior Author</option>
+                                        <option value="Corresponding"${p.role === 'Corresponding' ? ' selected' : ''}>Corresponding</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Figure Icon (if no image)</label>
+                                    <input type="text" value="${esc(p.figureIcon)}" data-field="figureIcon">
+                                </div>
+                                <div class="form-group col-span-full">
+                                    <label>Figure Image Path</label>
+                                    <input type="text" value="${esc(p.figure)}" data-field="figure" placeholder="e.g. assets/figures/paper.png">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Keywords (comma-separated)</label>
+                                <input type="text" value="${esc((p.keywords || []).join(', '))}" data-field="keywords" placeholder="e.g. VLM, Radiology, GRPO">
+                            </div>
+                            <div class="form-group">
+                                <label>Links (JSON array: [{"label":"Paper","url":"..."}])</label>
+                                <textarea rows="2" data-field="links">${esc(JSON.stringify(p.links))}</textarea>
+                            </div>
+                        </div>`).join('')}
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="savePublications()"><i class="fas fa-check"></i> Apply Changes</button>
+        `;
+    }
+
+    function savePublications() {
+        data.publications = [];
+        document.querySelectorAll('#pub-items .list-card').forEach(card => {
+            let links = [];
+            try { links = JSON.parse(card.querySelector('[data-field="links"]').value); } catch(e) {}
+            const keywordsRaw = card.querySelector('[data-field="keywords"]').value.trim();
+            const keywords = keywordsRaw ? keywordsRaw.split(',').map(k => k.trim()).filter(Boolean) : [];
+            const role = card.querySelector('[data-field="role"]').value;
+            const pubObj = {
+                category: card.querySelector('[data-field="category"]').value.trim(),
+                authors: card.querySelector('[data-field="authors"]').value.trim(),
+                title: card.querySelector('[data-field="title"]').value.trim(),
+                url: card.querySelector('[data-field="url"]').value.trim(),
+                venue: card.querySelector('[data-field="venue"]').value.trim(),
+                figure: card.querySelector('[data-field="figure"]').value.trim(),
+                figureIcon: card.querySelector('[data-field="figureIcon"]').value.trim(),
+                keywords,
+                links
+            };
+            if (role) pubObj.role = role;
+            data.publications.push(pubObj);
+        });
+        persistDraft();
+        showToast('Publications saved');
+    }
+
+    window.addPublication = function() {
+        data.publications.push({ category: '', authors: '<strong>F. Nooralahzadeh</strong>, et al.', title: '', url: '', venue: '', figure: '', figureIcon: 'fas fa-file-alt', role: '', keywords: [], links: [] });
+        renderPublicationsEditor();
+    };
+    window.removePublication = function(i) { data.publications.splice(i, 1); renderPublicationsEditor(); };
+
+    // ─── PROJECTS ───────────────────────────────────────
+    function renderProjectsEditor() {
+        editorArea.innerHTML = `
+            <div class="editor-card">
+                <div class="card-header-flex">
+                    <h3>Projects & Grants</h3>
+                    <button class="btn btn-sm btn-outline" onclick="addProject()"><i class="fas fa-plus"></i> Add</button>
+                </div>
+                <div id="proj-items">
+                    ${data.projects.map((p, i) => `
+                        <div class="list-card" data-idx="${i}">
+                            <div class="list-card-header">
+                                <strong>${p.title || 'New Project'}</strong>
+                                <div class="list-card-actions">
+                                    ${i > 0 ? `<button class="btn-icon" onclick="moveItem('projects',${i},-1)"><i class="fas fa-arrow-up"></i></button>` : ''}
+                                    <button class="btn-icon btn-danger" onclick="removeProject(${i})"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-grid-3">
+                                <div class="form-group">
+                                    <label>Badge (e.g. PI · DIZH)</label>
+                                    <input type="text" value="${esc(p.badge)}" data-field="badge">
+                                </div>
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select data-field="status">
+                                        <option value="Ongoing" ${(p.status || '') === 'Ongoing' ? 'selected' : ''}>Ongoing</option>
+                                        <option value="Completed" ${(p.status || '') === 'Completed' ? 'selected' : ''}>Completed</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Icon (FA class)</label>
+                                    <input type="text" value="${esc(p.icon)}" data-field="icon">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Title</label>
+                                <input type="text" value="${esc(p.title)}" data-field="title">
+                            </div>
+                            <div class="form-group">
+                                <label>Tagline</label>
+                                <input type="text" value="${esc(p.tagline)}" data-field="tagline">
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea rows="3" data-field="description">${esc(p.description)}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Tech Tags (comma separated)</label>
+                                <input type="text" value="${esc(p.tech.join(', '))}" data-field="tech">
+                            </div>
+                            <div class="form-group">
+                                <label>Links (JSON: [{"icon":"fab fa-github","label":"GitHub","url":"..."}])</label>
+                                <textarea rows="2" data-field="links">${esc(JSON.stringify(p.links))}</textarea>
+                            </div>
+                        </div>`).join('')}
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="saveProjects()"><i class="fas fa-check"></i> Apply Changes</button>
+        `;
+    }
+
+    function saveProjects() {
+        data.projects = [];
+        document.querySelectorAll('#proj-items .list-card').forEach(card => {
+            let links = [];
+            try { links = JSON.parse(card.querySelector('[data-field="links"]').value); } catch(e) {}
+            data.projects.push({
+                badge: card.querySelector('[data-field="badge"]').value.trim(),
+                status: card.querySelector('[data-field="status"]').value,
+                icon: card.querySelector('[data-field="icon"]').value.trim(),
+                title: card.querySelector('[data-field="title"]').value.trim(),
+                tagline: card.querySelector('[data-field="tagline"]').value.trim(),
+                description: card.querySelector('[data-field="description"]').value.trim(),
+                tech: card.querySelector('[data-field="tech"]').value.split(',').map(s => s.trim()).filter(Boolean),
+                links
+            });
+        });
+        persistDraft();
+        showToast('Projects saved');
+    }
+
+    window.addProject = function() {
+        data.projects.push({ badge: '', status: 'Ongoing', icon: 'fas fa-folder', title: '', tagline: '', description: '', tech: [], links: [] });
+        renderProjectsEditor();
+    };
+    window.removeProject = function(i) { data.projects.splice(i, 1); renderProjectsEditor(); };
+
+    // ─── EXPERIENCE ─────────────────────────────────────
+    function renderExperienceEditor() {
+        editorArea.innerHTML = `
+            <div class="editor-card">
+                <div class="card-header-flex">
+                    <h3>Experience & Education</h3>
+                    <button class="btn btn-sm btn-outline" onclick="addExperience()"><i class="fas fa-plus"></i> Add</button>
+                </div>
+                <div id="exp-items">
+                    ${data.experience.map((e, i) => `
+                        <div class="list-card" data-idx="${i}">
+                            <div class="list-card-header">
+                                <span class="list-card-badge ${e.type === 'education' ? 'badge-edu' : ''}">${e.type === 'education' ? '🎓 Education' : '💼 Work'}</span>
+                                <div class="list-card-actions">
+                                    ${i > 0 ? `<button class="btn-icon" onclick="moveItem('experience',${i},-1)"><i class="fas fa-arrow-up"></i></button>` : ''}
+                                    ${i < data.experience.length - 1 ? `<button class="btn-icon" onclick="moveItem('experience',${i},1)"><i class="fas fa-arrow-down"></i></button>` : ''}
+                                    <button class="btn-icon btn-danger" onclick="removeExperience(${i})"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-grid-3">
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input type="text" value="${esc(e.date)}" data-field="date">
+                                </div>
+                                <div class="form-group">
+                                    <label>Title / Position</label>
+                                    <input type="text" value="${esc(e.title)}" data-field="title">
+                                </div>
+                                <div class="form-group">
+                                    <label>Type</label>
+                                    <select data-field="type">
+                                        <option value="work" ${e.type === 'work' ? 'selected' : ''}>Work</option>
+                                        <option value="education" ${e.type === 'education' ? 'selected' : ''}>Education</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Place / Institution</label>
+                                <input type="text" value="${esc(e.place)}" data-field="place">
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea rows="2" data-field="description">${esc(e.description)}</textarea>
+                            </div>
+                        </div>`).join('')}
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="saveExperience()"><i class="fas fa-check"></i> Apply Changes</button>
+        `;
+    }
+
+    function saveExperience() {
+        data.experience = [];
+        document.querySelectorAll('#exp-items .list-card').forEach(card => {
+            data.experience.push({
+                date: card.querySelector('[data-field="date"]').value.trim(),
+                title: card.querySelector('[data-field="title"]').value.trim(),
+                type: card.querySelector('[data-field="type"]').value,
+                place: card.querySelector('[data-field="place"]').value.trim(),
+                description: card.querySelector('[data-field="description"]').value.trim()
+            });
+        });
+        persistDraft();
+        showToast('Experience saved');
+    }
+
+    window.addExperience = function() {
+        data.experience.unshift({ date: '', title: '', type: 'work', place: '', description: '' });
+        renderExperienceEditor();
+    };
+    window.removeExperience = function(i) { data.experience.splice(i, 1); renderExperienceEditor(); };
+
+    // ─── TEACHING ───────────────────────────────────────
+    function renderTeachingEditor() {
+        const t = data.teaching;
+        editorArea.innerHTML = `
+            <div class="editor-card">
+                <div class="card-header-flex">
+                    <h3>Courses</h3>
+                    <button class="btn btn-sm btn-outline" onclick="addCourse()"><i class="fas fa-plus"></i> Add</button>
+                </div>
+                <div id="course-items">
+                    ${t.courses.map((c, i) => `
+                        <div class="inline-group" data-idx="${i}">
+                            <input type="text" placeholder="Term" value="${esc(c.term)}" data-field="term" style="flex:0 0 130px">
+                            <input type="text" placeholder="Course Name" value="${esc(c.name)}" data-field="name">
+                            <input type="text" placeholder="Level" value="${esc(c.level)}" data-field="level" style="flex:0 0 200px">
+                            ${i > 0 ? `<button class="btn-icon" onclick="moveCourse(${i},-1)" title="Move up"><i class="fas fa-arrow-up"></i></button>` : ''}
+                            ${i < t.courses.length - 1 ? `<button class="btn-icon" onclick="moveCourse(${i},1)" title="Move down"><i class="fas fa-arrow-down"></i></button>` : ''}
+                            <button class="btn-icon btn-danger" onclick="removeCourse(${i})"><i class="fas fa-trash"></i></button>
+                        </div>`).join('')}
+                </div>
+            </div>
+            <div class="editor-card">
+                <h3>Certification Note</h3>
+                <div class="form-group">
+                    <input type="text" id="t-cert" value="${esc(t.certification)}">
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="saveTeaching()"><i class="fas fa-check"></i> Apply Changes</button>
+        `;
+    }
+
+    function saveTeaching() {
+        data.teaching.courses = [];
+        document.querySelectorAll('#course-items .inline-group').forEach(row => {
+            data.teaching.courses.push({
+                term: row.querySelector('[data-field="term"]').value.trim(),
+                name: row.querySelector('[data-field="name"]').value.trim(),
+                level: row.querySelector('[data-field="level"]').value.trim()
+            });
+        });
+        data.teaching.certification = val('t-cert');
+        persistDraft();
+        showToast('Teaching saved');
+    }
+
+    window.addCourse = function() { data.teaching.courses.push({ term: '', name: '', level: '' }); renderTeachingEditor(); };
+    window.removeCourse = function(i) { data.teaching.courses.splice(i, 1); renderTeachingEditor(); };
+    window.moveCourse = function(idx, dir) {
+        const arr = data.teaching.courses;
+        const newIdx = idx + dir;
+        if (newIdx < 0 || newIdx >= arr.length) return;
+        [arr[idx], arr[newIdx]] = [arr[newIdx], arr[idx]];
+        renderTeachingEditor();
+    };
+
+    // ─── STUDENTS ───────────────────────────────────────
+    function renderStudentsEditor() {
+        const s = data.students;
+        editorArea.innerHTML = `
+            <div class="editor-card">
+                <h3>Summary Note</h3>
+                <div class="form-group">
+                    <label>Shown above the student list (e.g. total supervised count)</label>
+                    <textarea rows="2" id="s-summary">${esc(s.summary)}</textarea>
+                </div>
+            </div>
+
+            <div class="editor-card">
+                <div class="card-header-flex">
+                    <h3>Current Students <span class="hint">Displayed as a compact list on the site</span></h3>
+                    <button class="btn btn-sm btn-outline" onclick="addCurrentStudent()"><i class="fas fa-plus"></i> Add Student</button>
+                </div>
+                <div id="current-students">
+                    ${s.current.map((st, i) => `
+                        <div class="inline-group" data-idx="${i}">
+                            <input type="text" placeholder="Student Name" value="${esc(st.name)}" data-field="name">
+                            <select data-field="badge" style="flex:0 0 110px">
+                                <option value="badge-master" ${st.badge === 'badge-master' ? 'selected' : ''}>Master's</option>
+                                <option value="badge-bachelor" ${st.badge === 'badge-bachelor' ? 'selected' : ''}>Bachelor's</option>
+                                <option value="badge-phd" ${st.badge === 'badge-phd' ? 'selected' : ''}>PhD</option>
+                                <option value="badge-semester" ${st.badge === 'badge-semester' ? 'selected' : ''}>Semester</option>
+                            </select>
+                            <input type="text" placeholder="Degree label" value="${esc(st.degree)}" data-field="degree" style="flex:0 0 120px">
+                            <input type="text" placeholder="Project title" value="${esc(st.project)}" data-field="project">
+                            ${i > 0 ? `<button class="btn-icon" onclick="moveStudent(${i},-1)" title="Move up"><i class="fas fa-arrow-up"></i></button>` : ''}
+                            ${i < s.current.length - 1 ? `<button class="btn-icon" onclick="moveStudent(${i},1)" title="Move down"><i class="fas fa-arrow-down"></i></button>` : ''}
+                            <button class="btn-icon btn-danger" onclick="removeCurrentStudent(${i})"><i class="fas fa-trash"></i></button>
+                        </div>`).join('')}
+                    ${s.current.length === 0 ? '<p class="empty-msg">No current students added yet. Click "Add Student" above.</p>' : ''}
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="saveStudents()"><i class="fas fa-check"></i> Apply Changes</button>
+        `;
+    }
+
+    function saveStudents() {
+        data.students.summary = document.getElementById('s-summary').value.trim();
+
+        data.students.current = [];
+        document.querySelectorAll('#current-students .inline-group').forEach(row => {
+            data.students.current.push({
+                name: row.querySelector('[data-field="name"]').value.trim(),
+                degree: row.querySelector('[data-field="degree"]').value.trim(),
+                badge: row.querySelector('[data-field="badge"]').value,
+                dates: '',
+                project: row.querySelector('[data-field="project"]').value.trim(),
+                description: ''
+            });
+        });
+        persistDraft();
+        showToast('Students saved');
+    }
+
+    window.addCurrentStudent = function() {
+        data.students.current.push({ name: '', degree: "Master's Thesis", badge: 'badge-master', dates: '2025 – present', project: '', description: '' });
+        renderStudentsEditor();
+    };
+    window.removeCurrentStudent = function(i) { data.students.current.splice(i, 1); renderStudentsEditor(); };
+    window.moveStudent = function(idx, dir) {
+        const arr = data.students.current;
+        const newIdx = idx + dir;
+        if (newIdx < 0 || newIdx >= arr.length) return;
+        [arr[idx], arr[newIdx]] = [arr[newIdx], arr[idx]];
+        renderStudentsEditor();
+    };
+    // ─── TALKS ──────────────────────────────────────────
+    function renderTalksEditor() {
+        editorArea.innerHTML = `
+            <div class="editor-card">
+                <div class="card-header-flex">
+                    <h3>Talks & Presentations</h3>
+                    <button class="btn btn-sm btn-outline" onclick="addTalk()"><i class="fas fa-plus"></i> Add</button>
+                </div>
+                <div id="talk-items">
+                    ${data.talks.map((t, i) => `
+                        <div class="inline-group" data-idx="${i}">
+                            <input type="text" placeholder="Date" value="${esc(t.date)}" data-field="date" style="flex:0 0 100px">
+                            <input type="text" placeholder="Title" value="${esc(t.title)}" data-field="title">
+                            <input type="text" placeholder="Venue" value="${esc(t.venue)}" data-field="venue">
+                            <div class="list-card-actions">
+                                ${i > 0 ? `<button class="btn-icon" onclick="moveItem('talks',${i},-1)"><i class="fas fa-arrow-up"></i></button>` : ''}
+                                <button class="btn-icon btn-danger" onclick="removeTalk(${i})"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>`).join('')}
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="saveTalks()"><i class="fas fa-check"></i> Apply Changes</button>
+        `;
+    }
+
+    function saveTalks() {
+        data.talks = [];
+        document.querySelectorAll('#talk-items .inline-group').forEach(row => {
+            data.talks.push({
+                date: row.querySelector('[data-field="date"]').value.trim(),
+                title: row.querySelector('[data-field="title"]').value.trim(),
+                venue: row.querySelector('[data-field="venue"]').value.trim()
+            });
+        });
+        persistDraft();
+        showToast('Talks saved');
+    }
+
+    window.addTalk = function() { data.talks.unshift({ date: '', title: '', venue: '' }); renderTalksEditor(); };
+    window.removeTalk = function(i) { data.talks.splice(i, 1); renderTalksEditor(); };
+
+    // ─── AWARDS ─────────────────────────────────────────
+    function renderAwardsEditor() {
+        editorArea.innerHTML = `
+            <div class="editor-card">
+                <div class="card-header-flex">
+                    <h3>Awards & Fellowships <span class="hint">HTML allowed in text.</span></h3>
+                    <button class="btn btn-sm btn-outline" onclick="addAward()"><i class="fas fa-plus"></i> Add</button>
+                </div>
+                <div id="award-items">
+                    ${data.awards.map((a, i) => `
+                        <div class="inline-group" data-idx="${i}">
+                            <input type="text" placeholder="Year" value="${esc(a.year)}" data-field="year" style="flex:0 0 80px">
+                            <input type="text" placeholder="Description (HTML ok)" value="${esc(a.text)}" data-field="text">
+                            ${i > 0 ? `<button class="btn-icon" onclick="moveItem('awards',${i},-1)" title="Move up"><i class="fas fa-arrow-up"></i></button>` : ''}
+                            ${i < data.awards.length - 1 ? `<button class="btn-icon" onclick="moveItem('awards',${i},1)" title="Move down"><i class="fas fa-arrow-down"></i></button>` : ''}
+                            <button class="btn-icon btn-danger" onclick="removeAward(${i})"><i class="fas fa-trash"></i></button>
+                        </div>`).join('')}
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="saveAwards()"><i class="fas fa-check"></i> Apply Changes</button>
+        `;
+    }
+
+    function saveAwards() {
+        data.awards = [];
+        document.querySelectorAll('#award-items .inline-group').forEach(row => {
+            data.awards.push({
+                year: row.querySelector('[data-field="year"]').value.trim(),
+                text: row.querySelector('[data-field="text"]').value.trim()
+            });
+        });
+        persistDraft();
+        showToast('Awards saved');
+    }
+
+    window.addAward = function() { data.awards.push({ year: '', text: '' }); renderAwardsEditor(); };
+    window.removeAward = function(i) { data.awards.splice(i, 1); renderAwardsEditor(); };
+
+    // ─── SERVICE ────────────────────────────────────────
+    function renderServiceEditor() {
+        const sv = data.service;
+        editorArea.innerHTML = `
+            <div class="editor-card">
+                <h3>Academic Service</h3>
+                <div class="form-group">
+                    <label>Description (HTML allowed)</label>
+                    <textarea rows="3" id="sv-desc">${esc(sv.description)}</textarea>
+                </div>
+            </div>
+            <div class="editor-card">
+                <div class="card-header-flex">
+                    <h3>Venues</h3>
+                    <button class="btn btn-sm btn-outline" onclick="addVenue()"><i class="fas fa-plus"></i> Add</button>
+                </div>
+                <div id="venue-items">
+                    ${sv.venues.map((v, i) => `
+                        <div class="inline-group" data-idx="${i}">
+                            <input type="text" placeholder="Venue name" value="${esc(v.name)}" data-field="name">
+                            <label class="checkbox-label"><input type="checkbox" data-field="highlight" ${v.highlight ? 'checked' : ''}> Highlight (AC/recent)</label>
+                            <button class="btn-icon btn-danger" onclick="removeVenue(${i})"><i class="fas fa-trash"></i></button>
+                        </div>`).join('')}
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="saveService()"><i class="fas fa-check"></i> Apply Changes</button>
+        `;
+    }
+
+    function saveService() {
+        data.service.description = document.getElementById('sv-desc').value.trim();
+        data.service.venues = [];
+        document.querySelectorAll('#venue-items .inline-group').forEach(row => {
+            data.service.venues.push({
+                name: row.querySelector('[data-field="name"]').value.trim(),
+                highlight: row.querySelector('[data-field="highlight"]').checked
+            });
+        });
+        persistDraft();
+        showToast('Service saved');
+    }
+
+    window.addVenue = function() { data.service.venues.push({ name: '', highlight: false }); renderServiceEditor(); };
+    window.removeVenue = function(i) { data.service.venues.splice(i, 1); renderServiceEditor(); };
+
+    // ─── GALLERY ────────────────────────────────────────
+    function renderGalleryEditor() {
+        if (!data.gallery) data.gallery = [];
+        editorArea.innerHTML = `
+            <div class="editor-card">
+                <div class="card-header-flex">
+                    <h3>Gallery <span class="hint">Photos from conferences, talks, courses, and events. Upload images to <code>assets/gallery/</code></span></h3>
+                    <button class="btn btn-sm btn-outline" onclick="addGalleryItem()"><i class="fas fa-plus"></i> Add Photo</button>
+                </div>
+                <div id="gallery-items">
+                    ${data.gallery.map((g, i) => `
+                        <div class="list-card" data-idx="${i}">
+                            <div class="list-card-header">
+                                <strong>${g.caption || 'New Photo'}</strong>
+                                <div class="list-card-actions">
+                                    ${i > 0 ? `<button class="btn-icon" onclick="moveItem('gallery',${i},-1)"><i class="fas fa-arrow-up"></i></button>` : ''}
+                                    ${i < data.gallery.length - 1 ? `<button class="btn-icon" onclick="moveItem('gallery',${i},1)"><i class="fas fa-arrow-down"></i></button>` : ''}
+                                    <button class="btn-icon btn-danger" onclick="removeGalleryItem(${i})"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-grid-3">
+                                <div class="form-group col-span-2">
+                                    <label>Image Path</label>
+                                    <input type="text" value="${esc(g.image)}" data-field="image" placeholder="e.g. assets/gallery/amld2025.jpg">
+                                </div>
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input type="text" value="${esc(g.date)}" data-field="date" placeholder="e.g. Feb 2025">
+                                </div>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Caption</label>
+                                    <input type="text" value="${esc(g.caption)}" data-field="caption">
+                                </div>
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select data-field="category">
+                                        <option value="conference" ${g.category === 'conference' ? 'selected' : ''}>Conference</option>
+                                        <option value="teaching" ${g.category === 'teaching' ? 'selected' : ''}>Teaching</option>
+                                        <option value="event" ${g.category === 'event' ? 'selected' : ''}>Event</option>
+                                    </select>
+                                </div>
+                            </div>
+                            ${g.image ? `<div style="margin-top:8px"><img src="${esc(g.image)}" alt="" style="max-width:200px;max-height:120px;border-radius:8px;border:1px solid var(--border);" onerror="this.style.display='none'"></div>` : ''}
+                        </div>`).join('')}
+                    ${data.gallery.length === 0 ? '<p class="empty-msg">No gallery items yet. Click "Add Photo" to get started.</p>' : ''}
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="saveGallery()"><i class="fas fa-check"></i> Apply Changes</button>
+        `;
+    }
+
+    function saveGallery() {
+        data.gallery = [];
+        document.querySelectorAll('#gallery-items .list-card').forEach(card => {
+            data.gallery.push({
+                image: card.querySelector('[data-field="image"]').value.trim(),
+                caption: card.querySelector('[data-field="caption"]').value.trim(),
+                date: card.querySelector('[data-field="date"]').value.trim(),
+                category: card.querySelector('[data-field="category"]').value
+            });
+        });
+        persistDraft();
+        showToast('Gallery saved');
+    }
+
+    window.addGalleryItem = function() {
+        data.gallery.push({ image: '', caption: '', date: '', category: 'conference' });
+        renderGalleryEditor();
+    };
+    window.removeGalleryItem = function(i) { data.gallery.splice(i, 1); renderGalleryEditor(); };
+
+    // ─── SHARED UTILITIES ───────────────────────────────
+    window.moveItem = function(key, idx, dir) {
+        const arr = data[key];
+        const newIdx = idx + dir;
+        if (newIdx < 0 || newIdx >= arr.length) return;
+        [arr[idx], arr[newIdx]] = [arr[newIdx], arr[idx]];
+        renderSection(key);
+    };
+
+    function val(id) { return document.getElementById(id).value.trim(); }
+    function esc(str) { return String(str || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        toast.textContent = '✓ ' + msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    // ─── DOWNLOAD data.js ───────────────────────────────
+    function downloadDataJS() {
+        // Build formatted JS
+        const json = JSON.stringify(data, null, 4);
+        const content = `/*  =====================================================
+    SITE CONTENT DATA
+    Edit this file to update all content on your website.
+    Then open admin.html for a visual editor.
+    ===================================================== */
+
+const siteData = ${json};
+`;
+        const blob = new Blob([content], { type: 'application/javascript' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'data.js';
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('data.js downloaded — replace the file in your project folder to publish');
+    }
+
+    // ─── Show draft banner if loaded from localStorage ──
+    if (saved) {
+        document.getElementById('draftBanner').style.display = '';
+    }
+
+    // ─── Initial render ─────────────────────────────────
+    renderSection('personal');
+
+    </script>
+</body>
+</html>
