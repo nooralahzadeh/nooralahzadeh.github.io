@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=20">
+    <link rel="stylesheet" href="style.css?v=22">
 </head>
 <body>
     <!-- Navigation -->
@@ -57,14 +57,22 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <h2 class="section-title">About</h2>
-            <div class="about-content">
-                <div class="about-text" id="about-text"></div>
-                <div class="metrics-bar" id="metrics-bar"></div>
-                <div class="about-highlights" id="about-highlights"></div>
+    <!-- About + News (Shared Frame) -->
+    <section class="section">
+        <div class="container about-news-container">
+            <div class="about-news-frame">
+                <div id="about" class="about-news-panel">
+                    <h2 class="section-title">About</h2>
+                    <div class="about-content">
+                        <div class="about-text" id="about-text"></div>
+                        <div class="metrics-bar" id="metrics-bar"></div>
+                        <div class="about-highlights" id="about-highlights"></div>
+                    </div>
+                </div>
+                <div id="news" class="about-news-panel about-news-panel-news">
+                    <h2 class="section-title">News</h2>
+                    <div class="news-feed" id="news-feed"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -74,14 +82,6 @@
         <div class="container">
             <h2 class="section-title">Technical Expertise</h2>
             <div class="skills-grid" id="skills-grid"></div>
-        </div>
-    </section>
-
-    <!-- News Section -->
-    <section id="news" class="section">
-        <div class="container">
-            <h2 class="section-title">News</h2>
-            <div class="news-feed" id="news-feed"></div>
         </div>
     </section>
 
