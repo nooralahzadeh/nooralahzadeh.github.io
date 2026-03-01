@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (document.getElementById('hero-name')) renderHero();
         if (document.getElementById('about-text')) renderAbout();
         if (document.getElementById('skills-grid')) renderSkills();
+        if (document.getElementById('hero-news-feed')) renderHeroNews();
         if (document.getElementById('news-feed')) renderNews();
         if (document.getElementById('research-grid')) renderResearch();
         if (document.getElementById('publications-table')) renderPublications();
@@ -127,6 +128,20 @@ function renderNews() {
                     <i class="fas fa-chevron-down"></i>
                 </button>
             </div>` : '');
+}
+
+function renderHeroNews() {
+    const HERO_NEWS_VISIBLE = 3;
+    const items = siteData.news.slice(0, HERO_NEWS_VISIBLE);
+    const feed = document.getElementById('hero-news-feed');
+    if (!feed) return;
+
+    feed.innerHTML = items.map(n => `
+        <div class="news-item hero-news-item">
+            <div class="news-date">${n.month}${n.year ? ' ' + n.year : ''}</div>
+            <div class="news-icon"><i class="${n.icon}"></i></div>
+            <div class="news-body"><p>${n.text}</p></div>
+        </div>`).join('');
 }
 
 function renderResearch() {

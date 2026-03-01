@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=22">
+    <link rel="stylesheet" href="style.css?v=27">
 </head>
 <body>
     <!-- Navigation -->
@@ -43,9 +43,14 @@
         <div class="hero-bg-pattern"></div>
         <div class="hero-content">
             <div class="hero-text">
-                <h1 class="hero-name" id="hero-name"></h1>
-                <p class="hero-title" id="hero-title"></p>
-                <p class="hero-affiliation" id="hero-affiliation"></p>
+                <div class="hero-head">
+                    <div class="hero-image" id="hero-image"></div>
+                    <div class="hero-identity">
+                        <h1 class="hero-name" id="hero-name"></h1>
+                        <p class="hero-title" id="hero-title"></p>
+                        <p class="hero-affiliation" id="hero-affiliation"></p>
+                    </div>
+                </div>
                 <p class="hero-tagline" id="hero-tagline"></p>
                 <div class="hero-links" id="hero-links"></div>
                 <div class="hero-cta">
@@ -53,27 +58,31 @@
                     <a href="#publications" class="btn-secondary-cta"><i class="fas fa-book"></i> Publications</a>
                 </div>
             </div>
-            <div class="hero-image" id="hero-image"></div>
+            <div class="hero-news">
+                <h3 class="hero-news-title"><i class="fas fa-bullhorn"></i> Latest News</h3>
+                <div class="news-feed hero-news-feed" id="hero-news-feed"></div>
+                <a href="#news" class="hero-news-more">View more news <i class="fas fa-arrow-right"></i></a>
+            </div>
         </div>
     </section>
 
-    <!-- About + News (Shared Frame) -->
-    <section class="section">
-        <div class="container about-news-container">
-            <div class="about-news-frame">
-                <div id="about" class="about-news-panel">
-                    <h2 class="section-title">About</h2>
-                    <div class="about-content">
-                        <div class="about-text" id="about-text"></div>
-                        <div class="metrics-bar" id="metrics-bar"></div>
-                        <div class="about-highlights" id="about-highlights"></div>
-                    </div>
-                </div>
-                <div id="news" class="about-news-panel about-news-panel-news">
-                    <h2 class="section-title">News</h2>
-                    <div class="news-feed" id="news-feed"></div>
-                </div>
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About</h2>
+            <div class="about-content">
+                <div class="about-text" id="about-text"></div>
+                <div class="metrics-bar" id="metrics-bar"></div>
+                <div class="about-highlights" id="about-highlights"></div>
             </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="section">
+        <div class="container">
+            <h2 class="section-title">News</h2>
+            <div class="news-feed" id="news-feed"></div>
         </div>
     </section>
 
@@ -161,6 +170,6 @@
     <button id="backToTop" title="Back to top"><i class="fas fa-arrow-up"></i></button>
 
     <script src="data.js?v=10"></script>
-    <script src="script.js?v=24"></script>
+    <script src="script.js?v=26"></script>
 </body>
 </html>
