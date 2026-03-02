@@ -10,7 +10,7 @@ const siteData = {
         "name": "Farhad Nooralahzadeh",
         "title": "Lecturer (Dozent) & Senior Researcher",
         "affiliation": "ZHAW · University of Zurich",
-        "tagline": "Building intelligent systems at the intersection of multimodal understanding, multilingual NLP, and clinical AI.",
+        "tagline": "Building intelligent systems at the intersection of multimodal understanding, multilingual NLP, and Trustworthy & Reliable AI.",
         "photo": "assets/figures/NOOR_31208-modified.jpg",
         "emails": [
             {

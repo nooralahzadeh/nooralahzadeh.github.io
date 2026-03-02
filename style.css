@@ -356,7 +356,7 @@ a:hover { color: var(--primary-dark); }
 
 .hero-name {
     font-family: var(--font-serif);
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-size: clamp(2.2rem, 4.4vw, 3rem);
     font-weight: 700;
     color: var(--text);
     line-height: 1.1;
@@ -365,16 +365,24 @@ a:hover { color: var(--primary-dark); }
 }
 
 .hero-title {
-    font-size: 1.05rem;
+    font-size: 1.32rem;
     font-weight: 500;
     color: var(--text-light);
     margin-bottom: 4px;
 }
 
 .hero-affiliation {
-    font-size: 0.9rem;
+    font-size: 1.12rem;
     color: var(--text-lighter);
-    margin-bottom: 0;
+    margin-bottom: 4px;
+}
+
+.hero-focus {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.01em;
+    margin: 0;
 }
 
 .hero-location {
@@ -388,7 +396,7 @@ a:hover { color: var(--primary-dark); }
 }
 
 .hero-tagline {
-    font-size: 0.95rem;
+    font-size: 1.2rem;
     color: var(--text-light);
     line-height: 1.6;
     max-width: 560px;
@@ -438,7 +446,7 @@ a:hover { color: var(--primary-dark); }
     gap: 8px;
     padding: 10px 22px;
     border-radius: var(--radius);
-    font-size: 0.88rem;
+    font-size: 0.96rem;
     font-weight: 600;
     text-decoration: none;
     transition: all var(--transition);
@@ -518,7 +526,7 @@ a:hover { color: var(--primary-dark); }
 }
 
 .hero-news-title {
-    font-size: 0.85rem;
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--text);
     display: flex;
@@ -557,7 +565,7 @@ a:hover { color: var(--primary-dark); }
 }
 
 .hero-news-item .news-body p {
-    font-size: 0.78rem;
+    font-size: 0.94rem;
     line-height: 1.45;
 }
 
@@ -566,7 +574,7 @@ a:hover { color: var(--primary-dark); }
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.78rem;
+    font-size: 0.88rem;
     font-weight: 600;
     color: var(--primary);
 }
