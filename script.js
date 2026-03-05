@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initAnimations();
     initSmoothScroll();
     initHeroAnimation();
+    initViewMode();
 });
 
 /* =====================================================
@@ -781,4 +782,12 @@ function initSmoothScroll() {
 
 function initHeroAnimation() {
     // Intentionally minimal — confident sites don't animate the hero
+}
+
+function initViewMode() {
+    const viewToggleLink = document.getElementById('viewToggleLink');
+    if (viewToggleLink) {
+        viewToggleLink.textContent = 'Academic View';
+        viewToggleLink.setAttribute('href', 'index.html');
+    }
 }

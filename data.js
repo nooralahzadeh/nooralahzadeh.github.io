@@ -20,7 +20,7 @@ const siteData = {
         ],
         "links": {
             "scholar": "https://scholar.google.ca/citations?user=iCPxe4UAAAAJ",
-            "github": "https://github.com/farhad-nooralahzadeh",
+            "github": "https://github.com/nooralahzadeh",
             "linkedin": "https://www.linkedin.com/in/farhad-nooralahzadeh/",
             "twitter": ""
         },
