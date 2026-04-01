@@ -148,7 +148,7 @@ function sortNewsChronological(items) {
         return yearNum * 100 + monthNum;
     }
 
-    return [...items].sort((a, b) => getSortKey(a) - getSortKey(b));
+    return [...items].sort((a, b) => getSortKey(b) - getSortKey(a));
 }
 
 function renderPublications() {
