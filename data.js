@@ -397,7 +397,7 @@ const siteData = {
     "projects": [
         {
             "badge": "Co-PI · DIZH",
-            "status": "In Progress",
+            "status": "Ongoing",
             "icon": "fas fa-notes-medical",
             "title": "MERLIN",
             "tagline": "Enabling real-time medical reasoning through multi-agent workflows",
