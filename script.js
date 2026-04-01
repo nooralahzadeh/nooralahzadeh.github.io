@@ -112,7 +112,7 @@ function renderSkills() {
 
 function renderNews() {
     const NEWS_VISIBLE = 5;
-    const items = siteData.news;
+    const items = sortNewsChronological(siteData.news);
     const hasMore = items.length > NEWS_VISIBLE;
 
     document.getElementById('news-feed').innerHTML =
@@ -133,7 +133,7 @@ function renderNews() {
 
 function renderHeroNews() {
     const HERO_NEWS_VISIBLE = 3;
-    const items = siteData.news.slice(0, HERO_NEWS_VISIBLE);
+    const items = sortNewsChronological(siteData.news).slice(0, HERO_NEWS_VISIBLE);
     const feed = document.getElementById('hero-news-feed');
     if (!feed) return;
 
@@ -143,6 +143,30 @@ function renderHeroNews() {
             <div class="news-icon"><i class="${n.icon}"></i></div>
             <div class="news-body"><p>${n.text}</p></div>
         </div>`).join('');
+}
+
+function sortNewsChronological(items) {
+    const monthMap = {
+        jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6,
+        jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12
+    };
+
+    function getSortKey(n) {
+        const rawMonth = String(n.month || '').trim();
+        const rawYear = String(n.year || '').trim();
+        let yearNum = parseInt(rawYear, 10);
+        let monthNum = monthMap[rawMonth.slice(0, 3).toLowerCase()] || 1;
+
+        if (Number.isNaN(yearNum)) {
+            const monthAsYear = parseInt(rawMonth, 10);
+            yearNum = Number.isNaN(monthAsYear) ? 0 : monthAsYear;
+            if (!monthMap[rawMonth.slice(0, 3).toLowerCase()]) monthNum = 1;
+        }
+
+        return yearNum * 100 + monthNum;
+    }
+
+    return [...items].sort((a, b) => getSortKey(a) - getSortKey(b));
 }
 
 function renderResearch() {

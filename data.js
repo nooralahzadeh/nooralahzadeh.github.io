@@ -119,10 +119,10 @@ const siteData = {
             "text": "<a href=\"https://arxiv.org/abs/2512.10691\" target=\"_blank\">\"Enhancing Radiology Report Generation and Visual Grounding using Reinforcement Learning\"</a> is accepted to MIDL 2026."
         },
         {
-            "month": "Feb",
+            "month": "Mar",
             "year": "2026",
             "icon": "fas fa-trophy",
-            "text": "<strong>New</strong> <a href=\"https://www.dizh.uzh.ch/en/2026/02/11/merlin-2/\">DIZH Funding — EMRLIN</a>! We will work on multi-agent systems for real-time decision support in critical care."
+            "text": "<strong>DIZH funding</strong> — <a href=\"https://www.dizh.uzh.ch/en/2026/02/11/merlin-2/\" target=\"_blank\" rel=\"noopener\">MERLIN</a> (multi-agent workflows for real-time medical reasoning in critical care), 2026–2029. Co-PI; around CHF 128K (DIZH + matching fund) for ZHAW."
         },
         {
             "month": "Oct",
@@ -395,6 +395,32 @@ const siteData = {
         }
     ],
     "projects": [
+        {
+            "badge": "Co-PI · DIZH",
+            "status": "In Progress",
+            "icon": "fas fa-notes-medical",
+            "title": "MERLIN",
+            "tagline": "Enabling real-time medical reasoning through multi-agent workflows",
+            "challenge": "Critical care teams must make rapid decisions from large multimodal patient data under high cognitive load.",
+            "approach": "Developing a multi-agent system for real-time medical reasoning and integrated ICU decision support workflows.",
+            "description": "DIZH Project Call (2026). Co-PI.",
+            "impact": [
+                "Approx. CHF 500K (UZH, ZHAW)"
+            ],
+            "tech": [
+                "DIZH",
+                "CHF 128k (ZHAW total)",
+                "Multi-agent systems",
+                "Critical care AI"
+            ],
+            "links": [
+                {
+                    "icon": "fas fa-external-link-alt",
+                    "label": "DIZH Project",
+                    "url": "https://www.dizh.uzh.ch/en/2026/02/11/merlin-2/"
+                }
+            ]
+        },
         {
             "badge": "PI · DIZH",
             "status": "Ongoing",
