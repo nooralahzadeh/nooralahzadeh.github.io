@@ -403,7 +403,7 @@ const siteData = {
             "tagline": "Enabling real-time medical reasoning through multi-agent workflows",
             "challenge": "Critical care teams must make rapid decisions from large multimodal patient data under high cognitive load.",
             "approach": "Developing a multi-agent system for real-time medical reasoning and integrated ICU decision support workflows.",
-            "description": "DIZH Project Call (2026). Co-PI.",
+            "description": "DIZH Project Call (2025). Co-PI.",
             "impact": [
                 "Approx. CHF 500K (UZH, ZHAW)"
             ],
