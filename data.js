@@ -116,7 +116,7 @@ const siteData = {
             "month": "Apr",
             "year": "2026",
             "icon": "fas fa-file-alt",
-            "text": "<strong>New preprint</strong> — <a href=\"https://arxiv.org/abs/2604.09364\" target=\"_blank\" rel=\"noopener\">\"Arbitration Failure, Not Perceptual Blindness: How Vision-Language Models Resolve Visual-Linguistic Conflicts\"</a> (Farhad Nooralahzadeh, Omid Rohanian, Yi Zhang, Jonathan Fürst, Kurt Stockinger) is now on arXiv."
+            "text": "<strong>New preprint</strong> — <a href=\"https://arxiv.org/abs/2604.09364\" target=\"_blank\" rel=\"noopener\">\"Arbitration Failure, Not Perceptual Blindness: How Vision-Language Models Resolve Visual-Linguistic Conflicts\"</a> is now on arXiv."
         },
         {
             "month": "Feb",
@@ -223,6 +223,28 @@ const siteData = {
         }
     ],
     "publications": [
+        {
+            "category": "multimodal trustworthy",
+            "authors": "<strong>F. Nooralahzadeh</strong>, O. Rohanian, Y. Zhang, J. Fürst, K. Stockinger",
+            "title": "Arbitration Failure, Not Perceptual Blindness: How Vision-Language Models Resolve Visual-Linguistic Conflicts",
+            "url": "https://arxiv.org/abs/2604.09364",
+            "venue": "Preprint, 2026",
+            "figure": "",
+            "figureIcon": "fas fa-eye",
+            "role": "First Author",
+            "keywords": [
+                "Vision-Language Models",
+                "Interpretability",
+                "Visual grounding",
+                "Mechanistic analysis"
+            ],
+            "links": [
+                {
+                    "label": "Paper",
+                    "url": "https://arxiv.org/abs/2604.09364"
+                }
+            ]
+        },
         {
             "category": "medical-ai trustworthy",
             "authors": "B. Gundersen, N. Deperroi, S. Ruiperez-Campillo, T. Sutter, J. Vogt, M. Moo, <strong>F. Nooralahzadeh</strong>, M. Krauthammer",
