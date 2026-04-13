@@ -113,6 +113,12 @@ const siteData = {
     },
     "news": [
         {
+            "month": "Apr",
+            "year": "2026",
+            "icon": "fas fa-file-alt",
+            "text": "<strong>New preprint</strong> — <a href=\"https://arxiv.org/abs/2604.09364\" target=\"_blank\" rel=\"noopener\">\"Arbitration Failure, Not Perceptual Blindness: How Vision-Language Models Resolve Visual-Linguistic Conflicts\"</a> (Farhad Nooralahzadeh, Omid Rohanian, Yi Zhang, Jonathan Fürst, Kurt Stockinger) is now on arXiv."
+        },
+        {
             "month": "Feb",
             "year": "2026",
             "icon": "fas fa-newspaper",
