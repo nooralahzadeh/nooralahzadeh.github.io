@@ -116,6 +116,12 @@ const siteData = {
             "month": "Apr",
             "year": "2026",
             "icon": "fas fa-file-alt",
+            "text": "<strong>New preprint</strong> — <a href=\"https://arxiv.org/abs/2604.15231\" target=\"_blank\" rel=\"noopener\">\"RadAgent: A tool-using AI agent for stepwise interpretation of chest computed tomography\"</a> is now on arXiv."
+        },
+        {
+            "month": "Apr",
+            "year": "2026",
+            "icon": "fas fa-file-alt",
             "text": "<strong>New preprint</strong> — <a href=\"https://arxiv.org/abs/2604.09364\" target=\"_blank\" rel=\"noopener\">\"Arbitration Failure, Not Perceptual Blindness: How Vision-Language Models Resolve Visual-Linguistic Conflicts\"</a> is now on arXiv."
         },
         {
@@ -224,12 +230,35 @@ const siteData = {
     ],
     "publications": [
         {
+            "category": "medical-ai agents",
+            "authors": "M. Roschewitz, K. Styppa, Y. Tao, J. Sohn, J-B. Delbrouck, B. Gundersen, N. Deperrois, C. Bluethgen, J. Vogt, B. Menze, <strong>F. Nooralahzadeh</strong>, M. Krauthammer, M. Moor",
+            "title": "RadAgent: A tool-using AI agent for stepwise interpretation of chest computed tomography",
+            "url": "https://arxiv.org/abs/2604.15231",
+            "venue": "Preprint, 2026",
+            "figure": "assets/figures/radagent_fig1.png",
+            "figureIcon": "fas fa-robot",
+            "role": "Co-Author",
+            "keywords": [
+                "Chest CT",
+                "AI agents",
+                "Medical AI",
+                "Vision-language models",
+                "Report generation"
+            ],
+            "links": [
+                {
+                    "label": "Paper",
+                    "url": "https://arxiv.org/abs/2604.15231"
+                }
+            ]
+        },
+        {
             "category": "multimodal trustworthy",
             "authors": "<strong>F. Nooralahzadeh</strong>, O. Rohanian, Y. Zhang, J. Fürst, K. Stockinger",
             "title": "Arbitration Failure, Not Perceptual Blindness: How Vision-Language Models Resolve Visual-Linguistic Conflicts",
             "url": "https://arxiv.org/abs/2604.09364",
             "venue": "Preprint, 2026",
-            "figure": "",
+            "figure": "assets/figures/arbitration_fig1.png",
             "figureIcon": "fas fa-eye",
             "role": "First Author",
             "keywords": [
