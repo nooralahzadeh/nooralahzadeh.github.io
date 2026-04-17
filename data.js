@@ -235,7 +235,7 @@ const siteData = {
             "title": "RadAgent: A tool-using AI agent for stepwise interpretation of chest computed tomography",
             "url": "https://arxiv.org/abs/2604.15231",
             "venue": "Preprint, 2026",
-            "figure": "assets/figures/radagent_fig1.png",
+            "figure": "assets/figures/radagent2026.png",
             "figureIcon": "fas fa-robot",
             "role": "Co-Author",
             "keywords": [
@@ -258,7 +258,7 @@ const siteData = {
             "title": "Arbitration Failure, Not Perceptual Blindness: How Vision-Language Models Resolve Visual-Linguistic Conflicts",
             "url": "https://arxiv.org/abs/2604.09364",
             "venue": "Preprint, 2026",
-            "figure": "assets/figures/arbitration_fig1.png",
+            "figure": "assets/figures/colm2026.png",
             "figureIcon": "fas fa-eye",
             "role": "First Author",
             "keywords": [
