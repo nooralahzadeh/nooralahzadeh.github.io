@@ -8,7 +8,7 @@ const siteData = {
     "_dataVersion": 10,
     "personal": {
         "name": "Farhad Nooralahzadeh",
-        "title": "Senior Scientist & Lecturer (Dozent)",
+        "title": "Principal Scientist/Lecturer — ZHAW",
         "affiliation": "ZHAW · University of Zurich",
         "tagline": "Building intelligent systems at the intersection of multimodal understanding, multilingual NLP, and Trustworthy & Reliable AI.",
         "photo": "assets/figures/NOOR_31208-modified.jpg",
@@ -89,7 +89,7 @@ const siteData = {
     ],
     "about": {
         "paragraphs": [
-            "I am a <strong>Senior Scientist &amp; Lecturer (Dozent)</strong>, serving as NLP Group Leader at the <strong>University of Zurich (UZH)</strong> and in the Intelligent Information Systems group at the <strong>Zurich University of Applied Sciences (ZHAW)</strong>.",
+            "I am a <strong>Principal Scientist/Lecturer</strong> at the Intelligent Information Systems group at the <strong>Zurich University of Applied Sciences (ZHAW)</strong>. I also serve as NLP Group Leader at the <strong>University of Zurich (UZH)</strong>.",
             "My current research concentrates on <strong>Multimodal Multilingual Data Exploration and Understanding</strong>, <strong>Multi-Agent Collaboration via LLMs</strong>, and <strong>Medical AI Assistant Tools</strong>.",
             "I completed my Ph.D. at the <strong>University of Oslo</strong> in the Language Technology Group at the SIRIUS centre on <em>Low-Resource Adaptation of Neural NLP Models</em>. Before pursuing a Ph.D., I worked as a Research Engineer at <strong>INRIA Sophia-Antipolis</strong> and spent a year at the <strong>Xerox Research Centre Europe</strong> (now Naver Labs Europe) in Grenoble. I hold a Master's degree from the <strong>Erasmus Mundus Program in Data Mining and Knowledge Management</strong>."
         ],
@@ -102,7 +102,7 @@ const siteData = {
             {
                 "icon": "fas fa-university",
                 "title": "Affiliations",
-                "text": "ZHAW (Dozent) & UZH Krauthammer Lab (Senior Scientist)"
+                "text": "ZHAW (Principal Scientist/Lecturer) & UZH Krauthammer Lab (Senior Scientist)"
             },
             {
                 "icon": "fas fa-award",
@@ -182,7 +182,7 @@ const siteData = {
             "month": "Aug",
             "year": "2024",
             "icon": "fas fa-bullhorn",
-            "text": "<strong>New Position</strong> — Appointed <strong>Senior Scientist &amp; Lecturer (Dozent)</strong> (teaching at <strong>ZHAW</strong>, Intelligent Information Systems Group; research leadership at <strong>UZH</strong>)."
+            "text": "<strong>New Position</strong> — Appointed <strong>Principal Scientist/Lecturer</strong> at <strong>ZHAW</strong>, Intelligent Information Systems Group."
         }
     ],
     "research": [
@@ -659,7 +659,7 @@ const siteData = {
     "experience": [
         {
             "date": "Aug 2024 – Present",
-            "title": "Senior Scientist & Lecturer (Dozent)",
+            "title": "Principal Scientist/Lecturer",
             "type": "work",
             "place": "ZHAW — Intelligent Information Systems Group",
             "description": "Co-Lead WP2 & WP3 in DataGEMS (EU-funded), PI on RADICAL & MuLi, Co-Lead on multimodal multilingual data exploration via language agents and NODE4StatBot.swiss (Text-to-SQL)."
