@@ -114,7 +114,7 @@ const siteData = {
     "news": [
         {
             "month": "May",
-            "year": "2027",
+            "year": "2026",
             "icon": "fas fa-users",
             "text": "<strong>EACL 2027</strong> — Diversity &amp; Inclusion co-chair on the <a href=\"https://2027.eacl.org/committees/organization/\" target=\"_blank\" rel=\"noopener\">organizing committee</a>."
         },
