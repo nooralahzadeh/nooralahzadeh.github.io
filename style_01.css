@@ -302,8 +302,41 @@ h2 {
 }
 
 .pub-venue {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
     color: #666;
     font-size: 0.73rem;
+}
+
+.pub-role {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 999px;
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.pub-role-first-author {
+    background: rgba(16, 185, 129, 0.12);
+    color: #047857;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.pub-role-senior-author {
+    background: rgba(99, 102, 241, 0.12);
+    color: #4338ca;
+    border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+.pub-role-co-author {
+    background: rgba(245, 158, 11, 0.14);
+    color: #b45309;
+    border: 1px solid rgba(245, 158, 11, 0.28);
 }
 
 .pub-links {

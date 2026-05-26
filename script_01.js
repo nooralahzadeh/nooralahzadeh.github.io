@@ -158,6 +158,7 @@ function renderPublications() {
     list.innerHTML = siteData.publications
         .map((p, i) => {
             const hiddenClass = i >= PUB_VISIBLE ? " is-hidden" : "";
+            const roleHTML = p.role ? roleBadge(p.role) : "";
             const links = Array.isArray(p.links)
                 ? p.links
                       .map(
@@ -186,7 +187,7 @@ function renderPublications() {
                 (p.affiliations ? '<p class="pub-affiliations">' + p.affiliations + "</p>" : "") +
                 '<p class="pub-venue">' +
                 (p.venue || "") +
-                (p.role ? " · " + p.role : "") +
+                (roleHTML ? " " + roleHTML : "") +
                 "</p>" +
                 (links ? '<div class="pub-links">' + links + "</div>" : "") +
                 "</article>"
@@ -196,6 +197,11 @@ function renderPublications() {
 
     const pubItems = Array.from(list.querySelectorAll(".pub-item"));
     applyShowMoreToggle("pubToggleBtn", pubItems, PUB_VISIBLE);
+}
+
+function roleBadge(role) {
+    const roleClass = role.toLowerCase().replace(/\s+/g, "-");
+    return '<span class="pub-role pub-role-' + roleClass + '">' + role + "</span>";
 }
 
 function renderCV() {
