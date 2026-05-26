@@ -244,7 +244,7 @@ const siteData = {
         {
             "category": "medical-ai trustworthy",
             "authors": "<strong>F. Nooralahzadeh</strong>, B. Gundersen, N. Deperrois, H. Matsuo, M. Nishio, T. Frauenfelder, A. Allam, C. Blüthgen, M. Moor, M. Krauthammer",
-            "affiliations": "University of Zurich and University Hospital of Zurich, Switzerland; Kobe University, Japan; ETH AI Center, Switzerland; ETH Zurich, Switzerland; Stanford University, USA; Zurich University of Applied Sciences, Switzerland",
+            "affiliations": "University of Zurich; University Hospital Zurich; Kobe University; ETH Zurich; Stanford University; Zurich University of Applied Sciences",
             "title": "Universal Boosts, Specific Suppressors: Sparse Autoencoder Steering of Medical Vision-Language Models",
             "url": "https://arxiv.org/abs/2605.24977",
             "venue": "Preprint, 2026",
@@ -267,7 +267,7 @@ const siteData = {
         {
             "category": "medical-ai agents",
             "authors": "M. Roschewitz, K. Styppa, Y. Tao, J. Sohn, J-B. Delbrouck, B. Gundersen, N. Deperrois, C. Bluethgen, J. Vogt, B. Menze, <strong>F. Nooralahzadeh</strong>, M. Krauthammer, M. Moor",
-            "affiliations": "Department of Biosystems Science and Engineering, ETH Zurich, Switzerland; ETH AI Center, Switzerland; Department of Computer Science, ETH Zurich, Switzerland; Heidelberg University, Germany; Stanford Center for Artificial Intelligence in Medicine and Imaging, Stanford University, USA; Department of Radiology, Stanford University, USA; Department of Quantitative Biomedicine, University of Zurich, Switzerland; Institute of Computer Science, Zurich University of Applied Sciences, Switzerland",
+            "affiliations": "ETH Zurich; Heidelberg University; Stanford University; University of Zurich; Zurich University of Applied Sciences",
             "title": "RadAgent: A tool-using AI agent for stepwise interpretation of chest computed tomography",
             "url": "https://arxiv.org/abs/2604.15231",
             "venue": "Preprint, 2026",
@@ -291,7 +291,7 @@ const siteData = {
         {
             "category": "multimodal trustworthy",
             "authors": "<strong>F. Nooralahzadeh</strong>, O. Rohanian, Y. Zhang, J. Fürst, K. Stockinger",
-            "affiliations": "Institute of Computer Science, Zurich University of Applied Sciences, Switzerland; University of Oxford, UK",
+            "affiliations": "Zurich University of Applied Sciences; University of Oxford",
             "title": "Arbitration Failure, Not Perceptual Blindness: How Vision-Language Models Resolve Visual-Linguistic Conflicts",
             "url": "https://arxiv.org/abs/2604.09364",
             "venue": "Preprint, 2026",
@@ -314,7 +314,7 @@ const siteData = {
         {
             "category": "medical-ai trustworthy",
             "authors": "B. Gundersen, N. Deperroi, S. Ruiperez-Campillo, T. Sutter, J. Vogt, M. Moo, <strong>F. Nooralahzadeh</strong>, M. Krauthammer",
-            "affiliations": "Department of Quantitative Biomedicine, University of Zurich, Switzerland; Department of Computer Science, ETH Zurich, Switzerland; Department of Biosystems Science and Engineering, ETH Zurich, Switzerland; Institute of Computer Science, Zurich University of Applied Sciences, Switzerland",
+            "affiliations": "University of Zurich; ETH Zurich; Zurich University of Applied Sciences",
             "title": "Enhancing Radiology Report Generation and Visual Grounding using Reinforcement Learning",
             "url": "https://arxiv.org/abs/2512.10691",
             "venue": "MIDL 2026",
@@ -342,7 +342,7 @@ const siteData = {
         {
             "category": "agents multimodal",
             "authors": "C. Bluethgen, D. Van Veen, D. Truhn,J.N. Kather, M. Moor, M. Polacin, A. Chaudhari, T. Frauenfelder, C.P. Langlotz, M. Krauthammer, and <strong>F. Nooralahzadeh</strong>",
-            "affiliations": "Diagnostic and Interventional Radiology, University Hospital Zurich and University of Zurich, Switzerland; HOPPR, USA; Lab for AI in Medicine, University Hospital Aachen, Germany; Diagnostic and Interventional Radiology, University Hospital Aachen, Germany; Else Kroener Fresenius Center for Digital Health, TUD Dresden University of Technology, Germany; Department of Biosystems Science and Engineering, ETH Zurich, Switzerland; Center for Artificial Intelligence in Medicine and Imaging, Stanford University, USA; Department of Radiology, Stanford University, USA; Department of Biomedical Data Science, Stanford University, USA; Department of Quantitative Biomedicine, University of Zurich, Switzerland; Institute of Computer Science, Zurich University of Applied Sciences, Switzerland",
+            "affiliations": "University Hospital Zurich; University of Zurich; HOPPR; University Hospital Aachen; TUD Dresden University of Technology; ETH Zurich; Stanford University; Zurich University of Applied Sciences",
             "title": "Systems in Radiology: Design, Applications, Evaluation, and Challenges.",
             "url": "https://arxiv.org/abs/2510.09404",
             "venue": "Preprint, 2025",
@@ -364,7 +364,7 @@ const siteData = {
         {
             "category": "multimodal agents",
             "authors": "<strong>F. Nooralahzadeh</strong>, Y. Zhang, J. Fürst, K. Stockinger",
-            "affiliations": "Zurich University of Applied Sciences, Switzerland",
+            "affiliations": "Zurich University of Applied Sciences",
             "title": "Multi-Modal Data Exploration via Language Agents",
             "url": "https://aclanthology.org/2025.findings-ijcnlp.47/",
             "venue": "IJCNLP-AACL 2025",
@@ -390,7 +390,7 @@ const siteData = {
         {
             "category": "medical-ai multimodal",
             "authors": "N. Deperrois, H. Matsuo, S. Ruipérez-Campillo, M. Vandenhirtz, S. Laguna, A. Ryser, K. Fujimoto, M. Nishio, T. M. Sutter, J. E. Vogt, J. Kluckert, T. Frauenfelder, C. Blüthgen, <strong>F. Nooralahzadeh</strong>, M. Krauthammer",
-            "affiliations": "Department of Radiology, Kobe University, Japan; Department of Computer Science, ETH Zurich, Switzerland; Department of Advanced Imaging in Medical Magnetic Resonance, Kyoto University, Japan; Department of Quantitative Biomedicine, University of Zurich, Switzerland; Diagnostic and Interventional Radiology, University Hospital Zurich, Switzerland; Institute of Computer Science, Zurich University of Applied Sciences, Switzerland",
+            "affiliations": "Kobe University; ETH Zurich; Kyoto University; University of Zurich; University Hospital Zurich; Zurich University of Applied Sciences",
             "title": "RadVLM: A Multitask Conversational Vision-Language Model for Radiology",
             "url": "https://arxiv.org/abs/2502.03333",
             "venue": "arXiv:2502.03333, 2025",
@@ -426,7 +426,7 @@ const siteData = {
         {
             "category": "multilingual",
             "authors": "<strong>F. Nooralahzadeh</strong> Y. Zhang, E. Smith, S. Maennel, C. Matthey-Doret, R. De Fondeville, K. Stockinger",
-            "affiliations": "Zurich University of Applied Sciences, Switzerland; Swiss Data Science Center, Switzerland; Federal Statistical Office, Switzerland",
+            "affiliations": "Zurich University of Applied Sciences; Swiss Data Science Center; Federal Statistical Office",
             "title": "StatBot.Swiss: Multilingual Open Data Exploration in Natural Language",
             "url": "https://aclanthology.org/2024.findings-acl.326/",
             "venue": "ACL 2024",
@@ -450,7 +450,7 @@ const siteData = {
         {
             "category": "multimodal multilingual",
             "authors": "<strong>F. Nooralahzadeh</strong>, R. Senrich",
-            "affiliations": "Department of Computational Linguistics, University of Zurich, Switzerland",
+            "affiliations": "University of Zurich",
             "title": "Improving the Cross-Lingual Generalisation in Visual Question Answering",
             "url": "https://ojs.aaai.org/index.php/AAAI/article/view/26574",
             "venue": "AAAI 2023",
@@ -473,7 +473,7 @@ const siteData = {
         {
             "category": "multimodal multilingual",
             "authors": "<strong>F. Nooralahzadeh</strong>, G. Bekoulis, J. Bjerva, and I. Augenstein",
-            "affiliations": "University of Oslo, Norway; Vrije Universiteit Brussel - imec, Belgium; University of Copenhagen, Denmark; Aalborg University, Denmark",
+            "affiliations": "University of Oslo; Vrije Universiteit Brussel; imec; University of Copenhagen; Aalborg University",
             "title": "Zero-shot cross-lingual transfer with meta learning",
             "url": "https://aclanthology.org/2020.emnlp-main.368/",
             "venue": "EMNLP 2020",
