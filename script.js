@@ -210,6 +210,7 @@ function renderPublications() {
                 </div>
                 <div class="pub-right">
                     <p class="pub-authors">${pub.authors}</p>
+                    ${pub.affiliations ? `<p class="pub-affiliations">${pub.affiliations}</p>` : ''}
                     <h3 class="pub-title"><a href="${pub.url}" target="_blank">${pub.title}</a></h3>
                     <p class="pub-venue">${pub.venue}</p>
                     ${keywordsHTML ? `<div class="pub-keywords">${keywordsHTML}</div>` : ''}

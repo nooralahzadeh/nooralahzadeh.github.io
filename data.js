@@ -244,6 +244,7 @@ const siteData = {
         {
             "category": "medical-ai trustworthy",
             "authors": "<strong>F. Nooralahzadeh</strong>, B. Gundersen, N. Deperrois, H. Matsuo, M. Nishio, T. Frauenfelder, A. Allam, C. Blüthgen, M. Moor, M. Krauthammer",
+            "affiliations": "University of Zurich and University Hospital of Zurich, Switzerland; Kobe University, Japan; ETH AI Center, Switzerland; ETH Zurich, Switzerland; Stanford University, USA; Zurich University of Applied Sciences, Switzerland",
             "title": "Universal Boosts, Specific Suppressors: Sparse Autoencoder Steering of Medical Vision-Language Models",
             "url": "https://arxiv.org/abs/2605.24977",
             "venue": "Preprint, 2026",

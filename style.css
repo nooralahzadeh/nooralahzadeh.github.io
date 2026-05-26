@@ -1128,6 +1128,12 @@ a:hover { color: var(--primary-dark); }
 
 .pub-right .pub-authors strong { color: var(--text); }
 
+.pub-right .pub-affiliations {
+    font-size: 0.76rem;
+    color: var(--muted);
+    line-height: 1.45;
+}
+
 .pub-right .pub-title {
     font-size: 0.98rem;
     font-weight: 600;

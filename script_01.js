@@ -183,6 +183,7 @@ function renderPublications() {
                 '<p class="pub-meta">' +
                 (p.authors || "") +
                 "</p>" +
+                (p.affiliations ? '<p class="pub-affiliations">' + p.affiliations + "</p>" : "") +
                 '<p class="pub-venue">' +
                 (p.venue || "") +
                 (p.role ? " · " + p.role : "") +
