@@ -115,6 +115,12 @@ const siteData = {
         {
             "month": "May",
             "year": "2026",
+            "icon": "fas fa-file-alt",
+            "text": "<strong>New preprint</strong> — <a href=\"https://arxiv.org/abs/2605.24977\" target=\"_blank\" rel=\"noopener\">\"Universal Boosts, Specific Suppressors: Sparse Autoencoder Steering of Medical Vision-Language Models\"</a> is now on arXiv."
+        },
+        {
+            "month": "May",
+            "year": "2026",
             "icon": "fas fa-users",
             "text": "<strong>EACL 2027</strong> — Diversity &amp; Inclusion co-chair on the <a href=\"https://2027.eacl.org/committees/organization/\" target=\"_blank\" rel=\"noopener\">organizing committee</a>."
         },
@@ -235,6 +241,28 @@ const siteData = {
         }
     ],
     "publications": [
+        {
+            "category": "medical-ai trustworthy",
+            "authors": "<strong>F. Nooralahzadeh</strong>, B. Gundersen, N. Deperrois, H. Matsuo, M. Nishio, T. Frauenfelder, A. Allam, C. Blüthgen, M. Moor, M. Krauthammer",
+            "title": "Universal Boosts, Specific Suppressors: Sparse Autoencoder Steering of Medical Vision-Language Models",
+            "url": "https://arxiv.org/abs/2605.24977",
+            "venue": "Preprint, 2026",
+            "figure": "",
+            "figureIcon": "fas fa-sliders",
+            "role": "First Author",
+            "keywords": [
+                "Sparse Autoencoders",
+                "Medical Vision-Language Models",
+                "Activation Steering",
+                "Hallucination Mitigation"
+            ],
+            "links": [
+                {
+                    "label": "Paper",
+                    "url": "https://arxiv.org/abs/2605.24977"
+                }
+            ]
+        },
         {
             "category": "medical-ai agents",
             "authors": "M. Roschewitz, K. Styppa, Y. Tao, J. Sohn, J-B. Delbrouck, B. Gundersen, N. Deperrois, C. Bluethgen, J. Vogt, B. Menze, <strong>F. Nooralahzadeh</strong>, M. Krauthammer, M. Moor",
