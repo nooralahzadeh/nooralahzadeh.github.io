@@ -183,6 +183,10 @@ h1 {
     color: #2a2a2a;
 }
 
+.about-toggle-wrap {
+    margin-top: 2px;
+}
+
 .section {
     padding: 24px 28px 28px;
     margin-top: 18px;

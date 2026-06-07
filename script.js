@@ -75,9 +75,34 @@ function renderHero() {
 
 function renderAbout() {
     const d = siteData.about;
+    const aboutText = document.getElementById('about-text');
+    const ABOUT_VISIBLE = 2;
 
-    document.getElementById('about-text').innerHTML =
-        d.paragraphs.map(p => `<p>${p}</p>`).join('');
+    aboutText.innerHTML = d.paragraphs
+        .map((p, i) => `<p${i >= ABOUT_VISIBLE ? ' class="section-overflow"' : ''}>${p}</p>`)
+        .join('');
+
+    const btn = document.getElementById('aboutToggleBtn');
+    const paragraphs = Array.from(aboutText.querySelectorAll('p'));
+    if (!btn || paragraphs.length <= ABOUT_VISIBLE) {
+        if (btn) btn.hidden = true;
+    } else {
+        btn.hidden = false;
+        btn.textContent = 'See more …';
+        btn.dataset.expanded = 'false';
+        btn.onclick = () => {
+            const expanded = btn.dataset.expanded === 'true';
+            if (expanded) {
+                paragraphs.forEach((p, i) => p.classList.toggle('section-overflow', i >= ABOUT_VISIBLE));
+                btn.dataset.expanded = 'false';
+                btn.textContent = 'See more …';
+            } else {
+                paragraphs.forEach((p) => p.classList.remove('section-overflow'));
+                btn.dataset.expanded = 'true';
+                btn.textContent = 'Show less';
+            }
+        };
+    }
 
     // Metrics bar
     const metricsBar = document.getElementById('metrics-bar');

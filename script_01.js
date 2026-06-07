@@ -8,6 +8,7 @@ const NEWS_VISIBLE = 4;
 const PUB_VISIBLE = 4;
 const PROJECT_VISIBLE = 4;
 const CV_VISIBLE = 4;
+const ABOUT_VISIBLE = 2;
 
 function renderAcademicView() {
     const d = siteData.personal;
@@ -91,7 +92,23 @@ function linkBtn(url, label, icon) {
 function renderAbout() {
     const about = document.getElementById("aboutCopy");
     if (!about || !siteData.about || !Array.isArray(siteData.about.paragraphs)) return;
-    about.innerHTML = siteData.about.paragraphs.map((p) => "<p>" + p + "</p>").join("");
+
+    about.innerHTML = siteData.about.paragraphs
+        .map(
+            (p, i) =>
+                '<p class="' +
+                (i >= ABOUT_VISIBLE ? "is-hidden" : "") +
+                '">' +
+                p +
+                "</p>"
+        )
+        .join("");
+
+    const paragraphs = Array.from(about.querySelectorAll("p"));
+    applyShowMoreToggle("aboutToggleBtn", paragraphs, ABOUT_VISIBLE, {
+        showMore: "See more …",
+        showLess: "Show less"
+    });
 }
 
 function renderNews() {
@@ -298,7 +315,7 @@ function initMenuToggle() {
     });
 }
 
-function applyShowMoreToggle(buttonId, items, visibleCount) {
+function applyShowMoreToggle(buttonId, items, visibleCount, labels) {
     const btn = document.getElementById(buttonId);
     if (!btn) return;
 
@@ -309,7 +326,9 @@ function applyShowMoreToggle(buttonId, items, visibleCount) {
 
     btn.hidden = false;
     const extraCount = items.length - visibleCount;
-    btn.textContent = "Show " + extraCount + " more";
+    const showMoreText = (labels && labels.showMore) || "Show " + extraCount + " more";
+    const showLessText = (labels && labels.showLess) || "Show less";
+    btn.textContent = showMoreText;
     btn.dataset.expanded = "false";
 
     btn.onclick = () => {
@@ -319,11 +338,11 @@ function applyShowMoreToggle(buttonId, items, visibleCount) {
                 item.classList.toggle("is-hidden", i >= visibleCount);
             });
             btn.dataset.expanded = "false";
-            btn.textContent = "Show " + extraCount + " more";
+            btn.textContent = showMoreText;
         } else {
             items.forEach((item) => item.classList.remove("is-hidden"));
             btn.dataset.expanded = "true";
-            btn.textContent = "Show less";
+            btn.textContent = showLessText;
         }
     };
 }

@@ -647,6 +647,12 @@ a:hover { color: var(--primary-dark); }
     line-height: 1.8;
 }
 
+.about-toggle-wrap {
+    padding-top: 0;
+    margin-top: -8px;
+    text-align: left;
+}
+
 .about-text strong {
     color: var(--text);
     font-weight: 600;
