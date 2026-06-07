@@ -406,7 +406,7 @@ function renderTeaching() {
                     <div class="teaching-item${i >= TEACH_VISIBLE ? ' section-overflow' : ''}" data-section="teaching"${i >= TEACH_VISIBLE ? ' data-overflow' : ''}>
                         <span class="teaching-term">${c.term}</span>
                         <div class="teaching-details">
-                            <strong>${c.name}</strong>
+                            <strong>${c.link ? `<a href="${c.link}" target="_blank" rel="noopener">${c.name}</a>` : c.name}</strong>
                             <span class="teaching-level">${c.level}</span>
                         </div>
                     </div>`).join('')}

@@ -113,6 +113,12 @@ const siteData = {
     },
     "news": [
         {
+            "month": "Jun",
+            "year": "2026",
+            "icon": "fas fa-chalkboard-teacher",
+            "text": "<strong>Teaching</strong> — Designed and delivered content focused on Large Language Models (LLMs) for the <a href=\"https://www.medlead.uzh.ch/de/module/artificial-intelligence-and-machine-learning.html\" target=\"_blank\" rel=\"noopener\">Artificial Intelligence &amp; Machine Learning</a> module of the UZH CAS in Medical Leadership."
+        },
+        {
             "month": "May",
             "year": "2026",
             "icon": "fas fa-file-alt",
@@ -781,6 +787,12 @@ const siteData = {
     ],
     "teaching": {
         "courses": [
+            {
+                "term": "May 2026",
+                "name": "CAS in Medical Leadership — Artificial Intelligence & Machine Learning",
+                "level": "Designed and delivered content focused on Large Language Models (LLMs)",
+                "link": "https://www.medlead.uzh.ch/de/module/artificial-intelligence-and-machine-learning.html"
+            },
             {
                 "term": "Spring 2026",
                 "name": "Intelligent Information Systems 2",
