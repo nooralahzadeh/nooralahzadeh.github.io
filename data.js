@@ -254,7 +254,7 @@ const siteData = {
             "title": "Universal Boosts, Specific Suppressors: Sparse Autoencoder Steering of Medical Vision-Language Models",
             "url": "https://arxiv.org/abs/2605.24977",
             "venue": "Preprint, 2026",
-            "figure": "",
+            "figure": "assets/figures/SAE-RadVLM.png",
             "figureIcon": "fas fa-sliders",
             "role": "First Author",
             "keywords": [
