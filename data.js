@@ -550,6 +550,11 @@ const siteData = {
             ],
             "links": [
                 {
+                    "icon": "fas fa-file-pdf",
+                    "label": "Proposal",
+                    "url": "assets/figures/RADICAL-Proposal.pdf"
+                },
+                {
                     "icon": "fas fa-external-link-alt",
                     "label": "DIZH",
                     "url": "https://www.dizh.uzh.ch"
