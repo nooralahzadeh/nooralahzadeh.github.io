@@ -116,7 +116,7 @@ const siteData = {
             "month": "Jun",
             "year": "2026",
             "icon": "fas fa-microphone",
-            "text": "<strong>AWS AI Health Leaders Forum</strong> — Presented our <strong>RadVLM</strong> project at the <a href=\"https://aws-experience.com/emea/smb/e/d3a15/ai-health-leaders-forum---lunch--learn\" target=\"_blank\" rel=\"noopener\">AI Health Leaders Forum</a> in Zurich, sharing how we are building a vision-language model for radiology. Thank you to AWS for the invitation, for bringing together healthcare leaders and AI innovators, and for the cloud infrastructure that helps us serve our models efficiently toward real-world clinical applications."
+            "text": "<strong>AWS AI Health Leaders Forum</strong> — Presented our <strong>RadVLM</strong> project at the <a href=\"https://aws-experience.com/emea/smb/e/d3a15/ai-health-leaders-forum---lunch--learn\" target=\"_blank\" rel=\"noopener\">AI Health Leaders Forum</a> in Zurich, sharing how we are building a vision-language model for radiology."
         },
         {
             "month": "Jun",
