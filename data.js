@@ -8,7 +8,7 @@ const siteData = {
     "_dataVersion": 10,
     "personal": {
         "name": "Farhad Nooralahzadeh",
-        "title": "Principal Scientist/Lecturer — ZHAW",
+        "title": "Principal Scientist/Lecturer",
         "affiliation": "ZHAW · University of Zurich",
         "tagline": "Building intelligent systems at the intersection of multimodal understanding, multilingual NLP, and Trustworthy & Reliable AI.",
         "photo": "assets/figures/NOOR_31208-modified.jpg",
