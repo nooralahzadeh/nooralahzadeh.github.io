@@ -89,7 +89,7 @@ const siteData = {
     ],
     "about": {
         "paragraphs": [
-            "I am a <strong>Principal Scientist/Lecturer</strong> at the Intelligent Information Systems group at the <strong>Zurich University of Applied Sciences (ZHAW)</strong>. I also serve as NLP Group Leader at the <strong>University of Zurich (UZH)</strong>.",
+            "I am a <strong>Principal Scientist/Lecturer</strong> at the Intelligent Information Systems group at the <strong>Zurich University of Applied Sciences (ZHAW)</strong>. I also serve as a <strong>senior researcher (NLP Group Leader)</strong> at the <strong>Krauthammer Lab</strong> at the <strong>University of Zurich (UZH)</strong>.",
             "My current research focuses on <strong>trustworthy medical vision-language models and agentic AI</strong> for radiology and clinical decision support, <strong>multi-agent collaboration via LLMs</strong>, and <strong>multimodal multilingual data exploration and understanding</strong>.",
             "I completed my Ph.D. at the <strong>University of Oslo</strong> in the Language Technology Group at the SIRIUS centre on <a href=\"https://www.mn.uio.no/ifi/forskning/aktuelt/arrangementer/disputaser/2020/nooralahzadeh.html\" target=\"_blank\" rel=\"noopener\"><em>Low-Resource Adaptation of Neural NLP Models</em></a>. Before pursuing a Ph.D., I worked as a Research Engineer at <strong>INRIA Sophia-Antipolis</strong> and spent a year at the <strong>Xerox Research Centre Europe</strong> (now Naver Labs Europe) in Grenoble. I hold a Master's degree from the <strong>Erasmus Mundus Program in Data Mining and Knowledge Management</strong>."
         ],
