@@ -5,7 +5,7 @@
     ===================================================== */
 
 const siteData = {
-    "_dataVersion": 10,
+    "_dataVersion": 11,
     "personal": {
         "name": "Farhad Nooralahzadeh",
         "title": "Principal Scientist/Lecturer",
@@ -112,6 +112,12 @@ const siteData = {
         ]
     },
     "news": [
+        {
+            "month": "Jul",
+            "year": "2026",
+            "icon": "fas fa-trophy",
+            "text": "<strong>Hasler Foundation funding</strong> — Our project \"FAVOR: Faithfulness Auditing of Visual-evidence in Open Reasoning\" funded by the <a href=\"https://haslerstiftung.ch/en/what-the-hasler-foundation-supports/supportprograms/new-thematic-research-program-hasler-responsible-ai/\" target=\"_blank\" rel=\"noopener\">Hasler Foundation</a> (CHF 49,160). PI."
+        },
         {
             "month": "Jun",
             "year": "2026",
