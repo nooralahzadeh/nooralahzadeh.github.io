@@ -5,7 +5,7 @@
     ===================================================== */
 
 const siteData = {
-    "_dataVersion": 12,
+    "_dataVersion": 13,
     "personal": {
         "name": "Farhad Nooralahzadeh",
         "title": "Principal Scientist/Lecturer",
@@ -763,7 +763,7 @@ const siteData = {
             "title": "Senior Scientist & NLP Group Leader (20%)",
             "type": "work",
             "place": "UZH — Krauthammer Lab & University Hospital Zurich",
-            "description": "Co-Lead Swiss-AI initiative (Foundation model for health), RadVLM, 3D Vision-Language Model for Radiology, Multimodal Medical AI Assistant Tools, PI on TRUST-RAD, Co-Lead Radiology Education with AI-driven digital platforms."
+            "description": "Co-Lead Swiss-AI initiative (Foundation model for health), RadVLM, 3D Vision-Language Model for Radiology, Multimodal Medical AI Assistant Tools, PI on TRUST-RAD & FAVOR, Co-Lead Radiology Education with AI-driven digital platforms."
         },
         {
             "date": "Nov 2022 – Jul 2024",
