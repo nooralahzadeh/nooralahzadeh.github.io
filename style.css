@@ -1328,6 +1328,11 @@ a:hover { color: var(--primary-dark); }
     color: #475569;
 }
 
+.status-funded {
+    background: #fef3c7;
+    color: #92400e;
+}
+
 .project-icon {
     width: 44px;
     height: 44px;

@@ -291,9 +291,18 @@ function renderProjects() {
 
             let statusHTML = '';
             if (proj.status) {
-                const isOngoing = proj.status.toLowerCase() === 'ongoing';
-                const statusLabel = isOngoing ? 'Ongoing' : 'Completed';
-                const statusClass = isOngoing ? 'status-ongoing' : 'status-completed';
+                const statusLower = proj.status.toLowerCase();
+                let statusLabel, statusClass;
+                if (statusLower === 'ongoing') {
+                    statusLabel = 'Ongoing';
+                    statusClass = 'status-ongoing';
+                } else if (statusLower === 'funded') {
+                    statusLabel = 'Funded';
+                    statusClass = 'status-funded';
+                } else {
+                    statusLabel = 'Completed';
+                    statusClass = 'status-completed';
+                }
                 statusHTML = `<div class="project-status ${statusClass}">${statusLabel}</div>`;
             }
 

@@ -5,7 +5,7 @@
     ===================================================== */
 
 const siteData = {
-    "_dataVersion": 11,
+    "_dataVersion": 12,
     "personal": {
         "name": "Farhad Nooralahzadeh",
         "title": "Principal Scientist/Lecturer",
@@ -514,6 +514,33 @@ const siteData = {
         }
     ],
     "projects": [
+        {
+            "badge": "PI · Hasler",
+            "status": "Funded",
+            "icon": "fas fa-eye",
+            "title": "FAVOR",
+            "tagline": "Faithfulness Auditing of Visual-evidence in Open Reasoning",
+            "challenge": "Vision-language models increasingly produce open-ended reasoning chains, but it remains unclear whether their conclusions are genuinely grounded in visual evidence or post-hoc rationalizations.",
+            "approach": "Developing auditing methods and causal interventions to verify whether model reasoning is faithfully supported by visual evidence in open multimodal reasoning tasks.",
+            "description": "Hasler Foundation Small Projects (2026). PI. Sep 2026 – Aug 2027.",
+            "impact": [
+                "CHF 49,160 funded",
+                "12-month project (Sep 2026 – Aug 2027)"
+            ],
+            "tech": [
+                "Hasler",
+                "CHF 49k",
+                "Faithful AI",
+                "Visual Grounding"
+            ],
+            "links": [
+                {
+                    "icon": "fas fa-external-link-alt",
+                    "label": "Hasler Foundation",
+                    "url": "https://haslerstiftung.ch/en/what-the-hasler-foundation-supports/open-support/small-projects-requested-amount-up-to-chf-50000/"
+                }
+            ]
+        },
         {
             "badge": "Co-PI · DIZH",
             "status": "Ongoing",
