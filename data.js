@@ -116,7 +116,7 @@ const siteData = {
             "month": "Jul",
             "year": "2026",
             "icon": "fas fa-trophy",
-            "text": "<strong>Hasler Foundation funding</strong> — Our project \"FAVOR: Faithfulness Auditing of Visual-evidence in Open Reasoning\" funded by the <a href=\"https://haslerstiftung.ch/en/what-the-hasler-foundation-supports/supportprograms/new-thematic-research-program-hasler-responsible-ai/\" target=\"_blank\" rel=\"noopener\">Hasler Foundation</a> (CHF 49,160). PI."
+            "text": "<strong>Hasler Foundation funding</strong> — Our project \"FAVOR: Faithfulness Auditing of Visual-evidence in Open Reasoning\" funded by the <a href=\"https://haslerstiftung.ch/en/what-the-hasler-foundation-supports/open-support/small-projects-requested-amount-up-to-chf-50000/\" target=\"_blank\" rel=\"noopener\">Hasler Foundation</a> (CHF 49,160). PI."
         },
         {
             "month": "Jun",
