@@ -5,7 +5,7 @@
     ===================================================== */
 
 const siteData = {
-    "_dataVersion": 14,
+    "_dataVersion": 15,
     "personal": {
         "name": "Farhad Nooralahzadeh",
         "title": "Principal Scientist/Lecturer",
@@ -318,7 +318,7 @@ const siteData = {
             "affiliations": "Zurich University of Applied Sciences; University of Oxford",
             "title": "Arbitration Failure, Not Perceptual Blindness: How Vision-Language Models Resolve Visual-Linguistic Conflicts",
             "url": "https://arxiv.org/abs/2604.09364",
-            "venue": "Preprint, 2026",
+            "venue": "COLM 2026",
             "figure": "assets/figures/colm2026.png",
             "figureIcon": "fas fa-eye",
             "role": "First Author",
