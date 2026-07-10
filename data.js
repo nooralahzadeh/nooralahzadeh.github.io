@@ -5,7 +5,7 @@
     ===================================================== */
 
 const siteData = {
-    "_dataVersion": 13,
+    "_dataVersion": 14,
     "personal": {
         "name": "Farhad Nooralahzadeh",
         "title": "Principal Scientist/Lecturer",
@@ -112,6 +112,12 @@ const siteData = {
         ]
     },
     "news": [
+        {
+            "month": "Jul",
+            "year": "2026",
+            "icon": "fas fa-newspaper",
+            "text": "<a href=\"https://arxiv.org/abs/2604.09364\" target=\"_blank\" rel=\"noopener\">\"Arbitration Failure, Not Perceptual Blindness: How Vision-Language Models Resolve Visual-Linguistic Conflicts\"</a> accepted to COLM 2026."
+        },
         {
             "month": "Jul",
             "year": "2026",
