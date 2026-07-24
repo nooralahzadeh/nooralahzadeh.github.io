@@ -5,7 +5,7 @@
     ===================================================== */
 
 const siteData = {
-    "_dataVersion": 15,
+    "_dataVersion": 16,
     "personal": {
         "name": "Farhad Nooralahzadeh",
         "title": "Principal Scientist/Lecturer",
@@ -112,6 +112,12 @@ const siteData = {
         ]
     },
     "news": [
+        {
+            "month": "Jul",
+            "year": "2026",
+            "icon": "fas fa-file-alt",
+            "text": "<strong>New preprint</strong> — <a href=\"https://arxiv.org/abs/2607.20993\" target=\"_blank\" rel=\"noopener\">\"Sparse Concept Channels in Frozen 3D CT Vision Encoders\"</a> is now on arXiv."
+        },
         {
             "month": "Jul",
             "year": "2026",
@@ -265,6 +271,30 @@ const siteData = {
         }
     ],
     "publications": [
+        {
+            "category": "medical-ai trustworthy",
+            "authors": "<strong>F. Nooralahzadeh</strong>, L. Bogensperger, C. Bluethgen, M. Krauthammer",
+            "affiliations": "University of Zurich; University Hospital Zurich",
+            "title": "Sparse Concept Channels in Frozen 3D CT Vision Encoders",
+            "url": "https://arxiv.org/abs/2607.20993",
+            "venue": "Preprint, 2026",
+            "figure": "",
+            "figureIcon": "fas fa-x-ray",
+            "role": "First Author",
+            "keywords": [
+                "3D CT",
+                "Vision Encoders",
+                "Sparse Concept Channels",
+                "Medical VLMs",
+                "Interpretability"
+            ],
+            "links": [
+                {
+                    "label": "Paper",
+                    "url": "https://arxiv.org/abs/2607.20993"
+                }
+            ]
+        },
         {
             "category": "medical-ai trustworthy",
             "authors": "<strong>F. Nooralahzadeh</strong>, B. Gundersen, N. Deperrois, H. Matsuo, M. Nishio, T. Frauenfelder, A. Allam, C. Blüthgen, M. Moor, M. Krauthammer",
