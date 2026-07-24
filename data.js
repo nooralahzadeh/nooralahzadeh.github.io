@@ -274,7 +274,7 @@ const siteData = {
         {
             "category": "medical-ai trustworthy",
             "authors": "<strong>F. Nooralahzadeh</strong>, L. Bogensperger, C. Bluethgen, M. Krauthammer",
-            "affiliations": "University of Zurich; University Hospital Zurich",
+            "affiliations": "University of Zurich; Zurich University of Applied Sciences; Stanford University",
             "title": "Sparse Concept Channels in Frozen 3D CT Vision Encoders",
             "url": "https://arxiv.org/abs/2607.20993",
             "venue": "Preprint, 2026",
