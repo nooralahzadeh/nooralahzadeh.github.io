@@ -113,6 +113,12 @@ const siteData = {
     },
     "news": [
         {
+            "month": "Sep",
+            "year": "2026",
+            "icon": "fas fa-newspaper",
+            "text": "<a href=\"https://arxiv.org/abs/2605.24977\" target=\"_blank\" rel=\"noopener\">\"Universal Boosts, Specific Suppressors: Sparse Autoencoder Steering of Medical Vision-Language Models\"</a> accepted to AACL-IJCNLP 2026, Main Conference."
+        },
+        {
             "month": "Jul",
             "year": "2026",
             "icon": "fas fa-file-alt",
@@ -301,7 +307,7 @@ const siteData = {
             "affiliations": "University of Zurich; University Hospital Zurich; Kobe University; ETH Zurich; Stanford University; Zurich University of Applied Sciences",
             "title": "Universal Boosts, Specific Suppressors: Sparse Autoencoder Steering of Medical Vision-Language Models",
             "url": "https://arxiv.org/abs/2605.24977",
-            "venue": "Preprint, 2026",
+            "venue": "AACL-IJCNLP 2026",
             "figure": "assets/figures/SAE-RadVLM.png",
             "figureIcon": "fas fa-sliders",
             "role": "First Author",
