@@ -5,7 +5,7 @@
     ===================================================== */
 
 const siteData = {
-    "_dataVersion": 18,
+    "_dataVersion": 19,
     "personal": {
         "name": "Farhad Nooralahzadeh",
         "title": "Principal Scientist/Lecturer",
@@ -116,7 +116,7 @@ const siteData = {
             "month": "Sep",
             "year": "2026",
             "icon": "fas fa-user-graduate",
-            "text": "<strong>Student news</strong> — Former Master's students <a href=\"https://www.polver.uni-konstanz.de/social-data-science-lab/team/elena-solar-1-1-1/\" target=\"_blank\" rel=\"noopener\">Jing Ma</a> (Computational Social Science, University of Konstanz) and Xinyao Cao (Human-AI Interaction for Mental Health, University College Dublin) began PhD programs."
+            "text": "<strong>Student news</strong> — Former Master's students <a href=\"https://www.polver.uni-konstanz.de/social-data-science-lab/team/elena-solar-1-1-1/\" target=\"_blank\" rel=\"noopener\">Jing Ma</a> (Computational Social Science, University of Konstanz) and <a href=\"https://csintranet.ucd.ie/phd-student/xinyao-cao/\" target=\"_blank\" rel=\"noopener\">Xinyao Cao</a> (Human-AI Interaction for Mental Health, University College Dublin) began PhD programs."
         },
         {
             "month": "Sep",
@@ -926,7 +926,7 @@ const siteData = {
             },
             {
                 "name": "Xinyao Cao",
-                "url": "",
+                "url": "https://csintranet.ucd.ie/phd-student/xinyao-cao/",
                 "degree": "Now PhD",
                 "badge": "badge-phd",
                 "project": "Human-AI Interaction for Mental Health under Dr. Wanling Cai, School of Computer Science, University College Dublin"
