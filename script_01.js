@@ -27,6 +27,7 @@ function renderAcademicView() {
     renderNews();
     renderPublications();
     renderProjects();
+    renderSupervision();
     renderCV();
     wireExternalLinks(d);
 }
@@ -249,6 +250,45 @@ function renderCV() {
 
     const cvItems = Array.from(list.querySelectorAll(".cv-item"));
     applyShowMoreToggle("cvToggleBtn", cvItems, CV_VISIBLE);
+}
+
+function renderSupervision() {
+    const summaryEl = document.getElementById("supervisionSummary");
+    const listEl = document.getElementById("supervisionList");
+    if (!summaryEl || !listEl || !siteData.students) return;
+
+    const s = siteData.students;
+    summaryEl.innerHTML = s.summary || "";
+
+    const alumni = Array.isArray(s.previous) ? s.previous.filter((st) => st && st.name) : [];
+    if (!alumni.length) {
+        listEl.innerHTML = "";
+        return;
+    }
+
+    listEl.innerHTML =
+        '<h3 class="supervision-subtitle">Former Master&rsquo;s students now in PhD programs</h3>' +
+        alumni
+            .map((st) => {
+                const name = st.url
+                    ? '<a href="' +
+                      st.url +
+                      '" target="_blank" rel="noopener">' +
+                      st.name +
+                      "</a>"
+                    : st.name;
+                return (
+                    '<article class="supervision-item">' +
+                    '<div class="supervision-name">' +
+                    name +
+                    "</div>" +
+                    '<div class="supervision-detail">' +
+                    (st.project || "") +
+                    "</div>" +
+                    "</article>"
+                );
+            })
+            .join("");
 }
 
 function renderProjects() {

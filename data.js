@@ -5,7 +5,7 @@
     ===================================================== */
 
 const siteData = {
-    "_dataVersion": 17,
+    "_dataVersion": 18,
     "personal": {
         "name": "Farhad Nooralahzadeh",
         "title": "Principal Scientist/Lecturer",
@@ -112,6 +112,12 @@ const siteData = {
         ]
     },
     "news": [
+        {
+            "month": "Sep",
+            "year": "2026",
+            "icon": "fas fa-user-graduate",
+            "text": "<strong>Student news</strong> — Former Master's students <a href=\"https://www.polver.uni-konstanz.de/social-data-science-lab/team/elena-solar-1-1-1/\" target=\"_blank\" rel=\"noopener\">Jing Ma</a> (Computational Social Science, University of Konstanz) and Xinyao Cao (Human-AI Interaction for Mental Health, University College Dublin) began PhD programs."
+        },
         {
             "month": "Sep",
             "year": "2026",
@@ -908,7 +914,7 @@ const siteData = {
         "certification": "Completed UZH Continuing Education in University Teaching and Learning (7 ECTS, 2023–2024)."
     },
     "students": {
-        "summary": "Supervised 14 Bachelor's and Master's theses/projects in AI, NLP, and Medical Informatics across UZH, ZHAW (MAS), ETH, and University of Bern (2022–2025).",
+        "summary": "Supervised 14+ Bachelor's and Master's theses/projects in AI, NLP, and Medical Informatics across UZH, ZHAW (MAS), ETH, and University of Bern (2022–2025). Among them, Jing Ma and Xinyao Cao continued to PhD programs.",
         "current": [],
         "previous": [
             {
