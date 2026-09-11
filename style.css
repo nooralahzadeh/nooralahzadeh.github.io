@@ -1633,6 +1633,17 @@ a:hover { color: var(--primary-dark); }
     color: var(--text);
 }
 
+a.student-list-name {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+a.student-list-name:hover {
+    color: var(--text);
+    text-decoration: underline;
+}
+
 .student-list-project {
     font-size: 0.83rem;
     color: var(--text-light);

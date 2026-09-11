@@ -461,23 +461,43 @@ function renderTeaching() {
             <h3 class="students-group-title"><i class="fas fa-user-graduate"></i> Current Students</h3>
             ${s.summary ? `<p class="students-summary">${s.summary}</p>` : ''}`;
 
-    if (s.current.length > 0) {
+    if (s.current && s.current.length > 0) {
         html += `<ul class="student-list">
-            ${s.current.map(st => `
-                <li class="student-list-item">
-                    <div class="student-list-main">
-                        <strong class="student-list-name">${st.name}</strong>
-                        <span class="student-degree ${st.badge}">${st.degree}</span>
-                    </div>
-                    ${st.project ? `<span class="student-list-project">${st.project}</span>` : ''}
-                </li>`).join('')}
+            ${s.current.map(st => renderStudentItem(st)).join('')}
         </ul>`;
     } else {
         html += `<p class="students-summary" style="font-style:normal; color:var(--text-light);">Student names will be added soon.</p>`;
     }
 
     html += '</div>';
+
+    // Former Master's students now in PhD programs
+    const alumni = (s.previous || []).filter(st => st && st.name);
+    if (alumni.length > 0) {
+        html += `
+        <div class="students-group">
+            <h3 class="students-group-title"><i class="fas fa-rocket"></i> Former Master&rsquo;s Students &mdash; Now in PhD Programs</h3>
+            <ul class="student-list">
+                ${alumni.map(st => renderStudentItem(st)).join('')}
+            </ul>
+        </div>`;
+    }
+
     document.getElementById('teaching-content').innerHTML = html;
+}
+
+function renderStudentItem(st) {
+    const nameHtml = st.url
+        ? `<a class="student-list-name" href="${st.url}" target="_blank" rel="noopener">${st.name}</a>`
+        : `<strong class="student-list-name">${st.name}</strong>`;
+    return `
+        <li class="student-list-item">
+            <div class="student-list-main">
+                ${nameHtml}
+                ${st.degree ? `<span class="student-degree ${st.badge || 'badge-phd'}">${st.degree}</span>` : ''}
+            </div>
+            ${st.project ? `<span class="student-list-project">${st.project}</span>` : ''}
+        </li>`;
 }
 
 function renderTalks() {

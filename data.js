@@ -5,7 +5,7 @@
     ===================================================== */
 
 const siteData = {
-    "_dataVersion": 16,
+    "_dataVersion": 17,
     "personal": {
         "name": "Farhad Nooralahzadeh",
         "title": "Principal Scientist/Lecturer",
@@ -910,7 +910,22 @@ const siteData = {
     "students": {
         "summary": "Supervised 14 Bachelor's and Master's theses/projects in AI, NLP, and Medical Informatics across UZH, ZHAW (MAS), ETH, and University of Bern (2022–2025).",
         "current": [],
-        "previous": []
+        "previous": [
+            {
+                "name": "Jing Ma",
+                "url": "https://www.polver.uni-konstanz.de/social-data-science-lab/team/elena-solar-1-1-1/",
+                "degree": "Now PhD",
+                "badge": "badge-phd",
+                "project": "Computational Social Science, Department of Politics and Public Administration, University of Konstanz"
+            },
+            {
+                "name": "Xinyao Cao",
+                "url": "",
+                "degree": "Now PhD",
+                "badge": "badge-phd",
+                "project": "Human-AI Interaction for Mental Health under Dr. Wanling Cai, School of Computer Science, University College Dublin"
+            }
+        ]
     },
     "talks": [
         {

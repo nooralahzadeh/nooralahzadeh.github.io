@@ -67,7 +67,7 @@
     <!-- Toast notification -->
     <div class="toast" id="toast"></div>
 
-    <script src="data.js?v=41"></script>
+    <script src="data.js?v=42"></script>
     <script>
     /* ==========================================================
        ADMIN EDITOR — Visual editor for data.js
@@ -944,7 +944,7 @@
                     <button class="btn btn-sm btn-outline" onclick="addCurrentStudent()"><i class="fas fa-plus"></i> Add Student</button>
                 </div>
                 <div id="current-students">
-                    ${s.current.map((st, i) => `
+                    ${(s.current || []).map((st, i) => `
                         <div class="inline-group" data-idx="${i}">
                             <input type="text" placeholder="Student Name" value="${esc(st.name)}" data-field="name">
                             <select data-field="badge" style="flex:0 0 110px">
@@ -955,11 +955,41 @@
                             </select>
                             <input type="text" placeholder="Degree label" value="${esc(st.degree)}" data-field="degree" style="flex:0 0 120px">
                             <input type="text" placeholder="Project title" value="${esc(st.project)}" data-field="project">
-                            ${i > 0 ? `<button class="btn-icon" onclick="moveStudent(${i},-1)" title="Move up"><i class="fas fa-arrow-up"></i></button>` : ''}
-                            ${i < s.current.length - 1 ? `<button class="btn-icon" onclick="moveStudent(${i},1)" title="Move down"><i class="fas fa-arrow-down"></i></button>` : ''}
+                            ${i > 0 ? `<button class="btn-icon" onclick="moveStudent('current',${i},-1)" title="Move up"><i class="fas fa-arrow-up"></i></button>` : ''}
+                            ${i < s.current.length - 1 ? `<button class="btn-icon" onclick="moveStudent('current',${i},1)" title="Move down"><i class="fas fa-arrow-down"></i></button>` : ''}
                             <button class="btn-icon btn-danger" onclick="removeCurrentStudent(${i})"><i class="fas fa-trash"></i></button>
                         </div>`).join('')}
-                    ${s.current.length === 0 ? '<p class="empty-msg">No current students added yet. Click "Add Student" above.</p>' : ''}
+                    ${(s.current || []).length === 0 ? '<p class="empty-msg">No current students added yet. Click "Add Student" above.</p>' : ''}
+                </div>
+            </div>
+
+            <div class="editor-card">
+                <div class="card-header-flex">
+                    <h3>Former Master&rsquo;s &rarr; PhD <span class="hint">Alumni now pursuing a PhD</span></h3>
+                    <button class="btn btn-sm btn-outline" onclick="addPreviousStudent()"><i class="fas fa-plus"></i> Add Alumni</button>
+                </div>
+                <div id="previous-students">
+                    ${(s.previous || []).map((st, i) => `
+                        <div class="list-card" data-idx="${i}" style="margin-bottom:12px;padding:12px;border:1px solid var(--border,#e5e7eb);border-radius:8px">
+                            <div class="inline-group" style="margin-bottom:8px">
+                                <input type="text" placeholder="Student Name" value="${esc(st.name)}" data-field="name">
+                                <select data-field="badge" style="flex:0 0 110px">
+                                    <option value="badge-phd" ${st.badge === 'badge-phd' ? 'selected' : ''}>PhD</option>
+                                    <option value="badge-master" ${st.badge === 'badge-master' ? 'selected' : ''}>Master's</option>
+                                </select>
+                                <input type="text" placeholder="Badge label (e.g. Now PhD)" value="${esc(st.degree)}" data-field="degree" style="flex:0 0 120px">
+                                ${i > 0 ? `<button class="btn-icon" onclick="moveStudent('previous',${i},-1)" title="Move up"><i class="fas fa-arrow-up"></i></button>` : ''}
+                                ${i < (s.previous || []).length - 1 ? `<button class="btn-icon" onclick="moveStudent('previous',${i},1)" title="Move down"><i class="fas fa-arrow-down"></i></button>` : ''}
+                                <button class="btn-icon btn-danger" onclick="removePreviousStudent(${i})"><i class="fas fa-trash"></i></button>
+                            </div>
+                            <div class="form-group" style="margin-bottom:8px">
+                                <input type="url" placeholder="Profile / lab URL (optional)" value="${esc(st.url || '')}" data-field="url">
+                            </div>
+                            <div class="form-group" style="margin:0">
+                                <input type="text" placeholder="PhD topic / affiliation" value="${esc(st.project || '')}" data-field="project">
+                            </div>
+                        </div>`).join('')}
+                    ${(s.previous || []).length === 0 ? '<p class="empty-msg">No alumni added yet.</p>' : ''}
                 </div>
             </div>
             <button class="btn btn-primary" onclick="saveStudents()"><i class="fas fa-check"></i> Apply Changes</button>
@@ -980,6 +1010,17 @@
                 description: ''
             });
         });
+
+        data.students.previous = [];
+        document.querySelectorAll('#previous-students .list-card').forEach(card => {
+            data.students.previous.push({
+                name: card.querySelector('[data-field="name"]').value.trim(),
+                url: card.querySelector('[data-field="url"]').value.trim(),
+                degree: card.querySelector('[data-field="degree"]').value.trim(),
+                badge: card.querySelector('[data-field="badge"]').value,
+                project: card.querySelector('[data-field="project"]').value.trim()
+            });
+        });
         persistDraft();
         showToast('Students saved');
     }
@@ -989,10 +1030,16 @@
         renderStudentsEditor();
     };
     window.removeCurrentStudent = function(i) { data.students.current.splice(i, 1); renderStudentsEditor(); };
-    window.moveStudent = function(idx, dir) {
-        const arr = data.students.current;
+    window.addPreviousStudent = function() {
+        if (!data.students.previous) data.students.previous = [];
+        data.students.previous.push({ name: '', url: '', degree: 'Now PhD', badge: 'badge-phd', project: '' });
+        renderStudentsEditor();
+    };
+    window.removePreviousStudent = function(i) { data.students.previous.splice(i, 1); renderStudentsEditor(); };
+    window.moveStudent = function(list, idx, dir) {
+        const arr = data.students[list];
         const newIdx = idx + dir;
-        if (newIdx < 0 || newIdx >= arr.length) return;
+        if (!arr || newIdx < 0 || newIdx >= arr.length) return;
         [arr[idx], arr[newIdx]] = [arr[newIdx], arr[idx]];
         renderStudentsEditor();
     };
