@@ -5,12 +5,12 @@
     ===================================================== */
 
 const siteData = {
-    "_dataVersion": 22,
+    "_dataVersion": 23,
     "personal": {
         "name": "Farhad Nooralahzadeh",
         "title": "Principal Scientist/Lecturer",
         "affiliation": "ZHAW · University of Zurich",
-        "tagline": "Building intelligent systems at the intersection of AI safety & alignment, multimodal understanding, multilingual NLP, and Trustworthy & Reliable AI.",
+        "tagline": "Building intelligent systems at the intersection of AI safety & alignment, multimodal understanding, and multilingual NLP.",
         "photo": "assets/figures/NOOR_31208-modified.jpg",
         "emails": [
             {
@@ -97,7 +97,7 @@ const siteData = {
             {
                 "icon": "fas fa-microscope",
                 "title": "Research Focus",
-                "text": "AI Safety & Alignment, Multimodal NLP, Trustworthy & Reliable AI, Multi-Agent LLMs, Medical AI"
+                "text": "AI Safety & Alignment, Multimodal NLP, Multi-Agent LLMs, Medical AI"
             },
             {
                 "icon": "fas fa-university",
@@ -279,7 +279,7 @@ const siteData = {
         },
         {
             "icon": "fas fa-shield-alt",
-            "title": "Trustworthy & Reliable AI",
+            "title": "AI Safety & Alignment",
             "text": "Mitigating hallucinations in medical VLMs through Sparse Autoencoders, GRPO reinforcement learning, and mechanistic interpretability.",
             "subtopics": [
                 "Hallucination detection & mitigation (SAEs)",
