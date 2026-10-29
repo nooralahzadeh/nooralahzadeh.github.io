@@ -5,7 +5,7 @@
     ===================================================== */
 
 const siteData = {
-    "_dataVersion": 19,
+    "_dataVersion": 20,
     "personal": {
         "name": "Farhad Nooralahzadeh",
         "title": "Principal Scientist/Lecturer",
@@ -112,6 +112,12 @@ const siteData = {
         ]
     },
     "news": [
+        {
+            "month": "Oct",
+            "year": "2026",
+            "icon": "fas fa-newspaper",
+            "text": "<a href=\"https://pubs.rsna.org/doi/10.1148/radiol.253226\" target=\"_blank\" rel=\"noopener\">\"Agentic AI Systems in Radiology: Design, Applications, Evaluation, and Challenges\"</a> published in <em>Radiology</em>."
+        },
         {
             "month": "Sep",
             "year": "2026",
@@ -409,9 +415,9 @@ const siteData = {
             "category": "agents multimodal",
             "authors": "C. Bluethgen, D. Van Veen, D. Truhn,J.N. Kather, M. Moor, M. Polacin, A. Chaudhari, T. Frauenfelder, C.P. Langlotz, M. Krauthammer, and <strong>F. Nooralahzadeh</strong>",
             "affiliations": "University Hospital Zurich; University of Zurich; HOPPR; University Hospital Aachen; TUD Dresden University of Technology; ETH Zurich; Stanford University; Zurich University of Applied Sciences",
-            "title": "Systems in Radiology: Design, Applications, Evaluation, and Challenges.",
-            "url": "https://arxiv.org/abs/2510.09404",
-            "venue": "Preprint, 2025",
+            "title": "Agentic AI Systems in Radiology: Design, Applications, Evaluation, and Challenges",
+            "url": "https://pubs.rsna.org/doi/10.1148/radiol.253226",
+            "venue": "Radiology, 2026",
             "figure": "assets/figures/agentic_radiology.png",
             "figureIcon": "fas fa-robot",
             "role": "Senior Author",
@@ -423,6 +429,10 @@ const siteData = {
             "links": [
                 {
                     "label": "Paper",
+                    "url": "https://pubs.rsna.org/doi/10.1148/radiol.253226"
+                },
+                {
+                    "label": "arXiv",
                     "url": "https://arxiv.org/abs/2510.09404"
                 }
             ]
