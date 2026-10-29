@@ -5,12 +5,12 @@
     ===================================================== */
 
 const siteData = {
-    "_dataVersion": 20,
+    "_dataVersion": 22,
     "personal": {
         "name": "Farhad Nooralahzadeh",
         "title": "Principal Scientist/Lecturer",
         "affiliation": "ZHAW · University of Zurich",
-        "tagline": "Building intelligent systems at the intersection of multimodal understanding, multilingual NLP, and Trustworthy & Reliable AI.",
+        "tagline": "Building intelligent systems at the intersection of AI safety & alignment, multimodal understanding, multilingual NLP, and Trustworthy & Reliable AI.",
         "photo": "assets/figures/NOOR_31208-modified.jpg",
         "emails": [
             {
@@ -90,14 +90,14 @@ const siteData = {
     "about": {
         "paragraphs": [
             "I am a <strong>Principal Scientist/Lecturer</strong> at the Intelligent Information Systems group at the <strong>Zurich University of Applied Sciences (ZHAW)</strong>. I also serve as a <strong>senior researcher (NLP Group Leader)</strong> at the <strong>Krauthammer Lab</strong> at the <strong>University of Zurich (UZH)</strong>.",
-            "My current research focuses on <strong>trustworthy medical vision-language models and agentic AI</strong> for radiology and clinical decision support, <strong>multi-agent collaboration via LLMs</strong>, and <strong>multimodal multilingual data exploration and understanding</strong>.",
+            "My current research focuses on <strong>AI safety and alignment</strong> (<a href=\"https://arxiv.org/abs/2605.24977\" target=\"_blank\" rel=\"noopener\"><em>SAE steering of medical VLMs</em></a>; <a href=\"https://arxiv.org/abs/2604.09364\" target=\"_blank\" rel=\"noopener\"><em>arbitration failure in VLMs</em></a>), <strong>trustworthy medical vision-language models and agentic AI</strong> for radiology and clinical decision support (<a href=\"https://arxiv.org/abs/2502.03333\" target=\"_blank\" rel=\"noopener\"><em>RadVLM</em></a>; <a href=\"https://pubs.rsna.org/doi/10.1148/radiol.253226\" target=\"_blank\" rel=\"noopener\"><em>agentic AI systems in radiology</em></a>; <a href=\"https://arxiv.org/abs/2512.10691\" target=\"_blank\" rel=\"noopener\"><em>visual grounding with GRPO</em></a>), <strong>multi-agent collaboration via LLMs</strong> (<a href=\"https://arxiv.org/abs/2604.15231\" target=\"_blank\" rel=\"noopener\"><em>RadAgent</em></a>), and <strong>multimodal multilingual data exploration and understanding</strong> (<a href=\"https://aclanthology.org/2025.findings-ijcnlp.47/\" target=\"_blank\" rel=\"noopener\"><em>multi-modal data exploration via language agents</em></a>; <a href=\"https://aclanthology.org/2024.findings-acl.326/\" target=\"_blank\" rel=\"noopener\"><em>StatBot.Swiss</em></a>).",
             "I completed my Ph.D. at the <strong>University of Oslo</strong> in the Language Technology Group at the SIRIUS centre on <a href=\"https://www.mn.uio.no/ifi/forskning/aktuelt/arrangementer/disputaser/2020/nooralahzadeh.html\" target=\"_blank\" rel=\"noopener\"><em>Low-Resource Adaptation of Neural NLP Models</em></a>. Before pursuing a Ph.D., I worked as a Research Engineer at <strong>INRIA Sophia-Antipolis</strong> and spent a year at the <strong>Xerox Research Centre Europe</strong> (now Naver Labs Europe) in Grenoble. I hold a Master's degree from the <strong>Erasmus Mundus Program in Data Mining and Knowledge Management</strong>."
         ],
         "highlights": [
             {
                 "icon": "fas fa-microscope",
                 "title": "Research Focus",
-                "text": "Multimodal NLP, Trustworthy & Reliable AI, Multi-Agent LLMs, Medical AI"
+                "text": "AI Safety & Alignment, Multimodal NLP, Trustworthy & Reliable AI, Multi-Agent LLMs, Medical AI"
             },
             {
                 "icon": "fas fa-university",
